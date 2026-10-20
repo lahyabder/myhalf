@@ -1,0 +1,37 @@
+{
+  "name": "MYHALF — Two People. One Account.",
+  "short_name": "MYHALF",
+  "description": "The first multilingual social network exclusively for shared two-person accounts. Equal ownership, dual governance, and dual perspectives.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#12181A",
+  "theme_color": "#247B78",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "اليومي المشترك (Daily Half)",
+      "url": "/#screen-daily-prompt",
+      "description": "أجب على سؤال اليوم واكشف إجابة نصفك الآخر"
+    },
+    {
+      "name": "منشور جديد (New Duo Post)",
+      "url": "/#screen-standard-composer",
+      "description": "أنشئ منشوراً مشتركاً أو من منظورين"
+    },
+    {
+      "name": "محادثات الثنائيات (Duo Chat)",
+      "url": "/#screen-chat-hub",
+      "description": "تحدث كشخص أو كصوت موحد مع ثنائيات أخرى"
+    }
+  ]
+}

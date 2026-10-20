@@ -3,8 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MYHALF — شخصان. حساب واحد. ملكية متساوية</title>
-  <meta name="description" content="شبكة اجتماعية متعددة اللغات مخصصة حصرياً للحسابات المشتركة بين شخصين بملكية متساوية وحوكمة مزدوجة.">
+  <title>MYHALF — شخصان. حساب واحد. ملكية متساوية | Two People. One Account.</title>
+  <meta name="description" content="الشبكة الاجتماعية الأولى عالمياً المخصصة حصرياً للحسابات الثنائية المشتركة بملكية متساوية، وجهتا نظر، وحوكمة مزدوجة.">
+  <link rel="canonical" href="https://myhalf.online">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <meta name="theme-color" content="#247B78">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MYHALF">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://myhalf.online/">
+  <meta property="og:title" content="MYHALF — شخصان. حساب واحد. ملكية متساوية">
+  <meta property="og:description" content="الشبكة الاجتماعية الأولى عالمياً المخصصة حصرياً للحسابات الثنائية المشتركة بملكية متساوية، وجهتا نظر، وحوكمة مزدوجة.">
+  <meta property="og:image" content="https://myhalf.online/icon.svg">
+  <meta property="og:site_name" content="MYHALF">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MYHALF — Two People. One Account. Equal Ownership.">
+  <meta name="twitter:description" content="The world's first duo-only social network.">
+  <meta name="twitter:image" content="https://myhalf.online/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -897,6 +917,10 @@
       <button class="icon-btn" onclick="openChatModal()" title="الدردشة المشتركة 2x2">
         <span>💬</span> <span style="font-size: 11px;">الدردشة 2x2</span>
       </button>
+      <button class="icon-btn" onclick="toggleSound()" title="تبديل المؤثرات الصوتية التفاعلية" id="btnSound">🔊</button>
+      <button class="icon-btn" onclick="installPWA()" title="تثبيت التطبيق على جهازك" id="btnInstallApp" style="display:none; color: var(--color-primary); font-weight:700;">
+        <span>📲</span> <span style="font-size: 11px;">تثبيت</span>
+      </button>
       <select class="lang-select" id="langSelect" onchange="changeLocale(this.value)">
         <option value="ar" selected>العربية (RTL)</option>
         <option value="fr">Français</option>
@@ -1155,9 +1179,24 @@
     </div>
 
     <div id="screen-invite" class="screen-view">
-      <div class="card">
-        <h3 style="font-size: 20px; margin-bottom: 8px;">دعوة المالك الثاني للحساب</h3>
-        <button class="btn btn-secondary btn-full" onclick="switchScreen('screen-accept')">إرسال الدعوة ونسخ الرابط</button>
+      <div class="card" style="text-align: center; padding: 28px 20px;">
+        <div style="font-size: 40px; margin-bottom: 12px;">🤝</div>
+        <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">دعوة المالك الثاني للحساب</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">
+          حسابات MYHALF تتطلب دائماً شخصين بملكية متساوية. أنشئ رابط الدعوة المشفر وأرسله لشريكك أو توأم روحك ليكتمل الحساب.
+        </p>
+        <div style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px dashed var(--color-primary); margin-bottom: 20px;">
+          <div style="font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px;">رابط الدعوة المباشر المشفر (صالح لمدة 7 أيام):</div>
+          <code style="font-size: 13px; font-weight: 700; color: var(--color-primary); word-break: break-all;">https://myhalf.online/invite?code=mhi_vip77</code>
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 14px;">
+          <button class="btn btn-primary" style="flex: 1;" onclick="shareInviteLink()">
+            🔗 مشاركة الرابط مع الشريك
+          </button>
+          <button class="btn btn-secondary" onclick="switchScreen('screen-accept')">
+            معاينة قبول الشريك ←
+          </button>
+        </div>
       </div>
     </div>
 
@@ -1305,12 +1344,12 @@
       </p>
 
       <div style="background: white; padding: 10px; border-radius: var(--radius-md); display: inline-block; margin-bottom: 20px;">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://myhalf.social/sara_and_omar" alt="QR Code" style="display: block;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://myhalf.online/@sara_and_omar" alt="QR Code" style="display: block;">
       </div>
 
       <div style="display: flex; gap: 10px;">
-        <button class="btn btn-primary" style="flex: 2; background: white; color: var(--color-primary);" onclick="showToast('تم نسخ رابط البطاقة الفاخرة للمشاركة!'); closeShareDirect();">
-          📋 نسخ الرابط للمشاركة
+        <button class="btn btn-primary" style="flex: 2; background: white; color: var(--color-primary); font-weight: 800;" onclick="shareCardDirect()">
+          ✨ مشاركة البطاقة الفاخرة
         </button>
         <button class="btn btn-outline" style="flex: 1; border-color: rgba(255,255,255,0.4); color: white;" onclick="closeShareDirect()">
           إغلاق
@@ -1514,6 +1553,7 @@
 
     // Screen Navigation
     function switchScreen(screenId) {
+      playPop();
       document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
       const target = document.getElementById(screenId);
       if (target) {
@@ -1540,6 +1580,7 @@
 
     // Like Action
     function likePost(btn) {
+      playPop();
       const countEl = btn.querySelector('.like-count');
       let count = parseInt(countEl.innerText);
       count++;
@@ -1561,6 +1602,7 @@
     // Story Modal Controls
     let storyTimeout = null;
     function openStory(author, caption, imgUrl, av1, av2) {
+      playPop();
       const modal = document.getElementById('storyModal');
       document.getElementById('storyModalAuthor').innerText = author;
       document.getElementById('storyModalCaption').innerText = caption;
@@ -1585,6 +1627,7 @@
 
     // Emergency Freeze Action
     function triggerSafetyFreeze() {
+      playSecretWhisper();
       const confirmed = confirm('هل أنت متأكد من تجميد الحساب المشترك فوراً؟ سيتم إيقاف كافة المنشورات والتفاعلات العلنية لحمايتك.');
       if (confirmed) {
         showToast('🚨 تم تجميد الحساب فوراً بنجاح! تم عزل المحتوى وتعليق أي وصول خارجي.');
@@ -1623,6 +1666,204 @@
       document.getElementById('txtTagline').innerText = t.tagline;
       document.getElementById('txtScreenSelect').innerText = t.screensText;
       showToast(`اللغة المحددة: ${locale.toUpperCase()} (${document.documentElement.dir.toUpperCase()})`);
+    }
+  
+    // ==========================================
+    // 🎵 Web Audio API Tactile Sound Engine
+    // ==========================================
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) {
+          audioCtx = new AudioContext();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playPop() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        const now = ctx.currentTime;
+        osc.frequency.setValueAtTime(520, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.07);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.07);
+      } catch (e) {}
+    }
+
+    function playChime() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        [523.25, 659.25, 783.99].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+          gain.gain.setValueAtTime(0.15, now + idx * 0.06);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.35);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.06);
+          osc.stop(now + idx * 0.06 + 0.35);
+        });
+      } catch (e) {}
+    }
+
+    function playStreakFlame() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        [440, 554.37, 659.25, 880].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+          gain.gain.setValueAtTime(0.2, now + idx * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.07);
+          osc.stop(now + idx * 0.07 + 0.4);
+        });
+      } catch (e) {}
+    }
+
+    function playSecretWhisper() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        const now = ctx.currentTime;
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.12);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('btnSound');
+      if (btn) {
+        btn.innerText = soundEnabled ? '🔊' : '🔇';
+      }
+      showToast(soundEnabled ? '🔊 تم تفعيل المؤثرات الصوتية' : '🔇 تم كتم المؤثرات الصوتية');
+      if (soundEnabled) playPop();
+    }
+
+    // ==========================================
+    // 📲 Native Share & PWA Handlers
+    // ==========================================
+    async function shareCardDirect() {
+      playChime();
+      const shareData = {
+        title: 'بطاقة الثنائي الرسمية — سارة وعمر على MYHALF',
+        text: 'تابعوا رحلتنا وإبداعاتنا المشتركة على شبكة MYHALF (شخصان. حساب واحد. ملكية متساوية):',
+        url: 'https://myhalf.online/@sara_and_omar'
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          showToast('✨ تمت مشاركة بطاقة الثنائي بنجاح!');
+          closeShareDirect();
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+        }
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText('https://myhalf.online/@sara_and_omar');
+        showToast('✨ تم نسخ رابط بطاقة الثنائي بنجاح!');
+      } else {
+        showToast('رابط البطاقة: https://myhalf.online/@sara_and_omar');
+      }
+      closeShareDirect();
+    }
+
+    async function shareInviteLink() {
+      playChime();
+      const inviteUrl = 'https://myhalf.online/invite?code=mhi_vip77';
+      const shareData = {
+        title: 'دعوة للانضمام إلى MYHALF كنصفي الآخر',
+        text: 'أدعوك لتكون نصفي الآخر في حسابنا المشترك على MYHALF (شخصان. حساب واحد. ملكية متساوية):',
+        url: inviteUrl
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          showToast('✨ تم إرسال رابط الدعوة بنجاح!');
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+        }
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(inviteUrl);
+        showToast('✨ تم نسخ رابط الدعوة المشفر بنجاح! شاركه مع نصفك الآخر الآن.');
+      } else {
+        showToast('رابط الدعوة: ' + inviteUrl);
+      }
+    }
+
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+          console.log('MYHALF ServiceWorker registered');
+        }).catch(() => {});
+      });
+    }
+
+    // PWA Install Prompt Handler
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const pwaBtn = document.getElementById('btnInstallApp');
+      if (pwaBtn) pwaBtn.style.display = 'inline-flex';
+    });
+
+    function installPWA() {
+      playPop();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('🎉 شكراً لتثبيت تطبيق MYHALF على جهازك!');
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        showToast('💡 لتثبيت التطبيق: اضغط زر المشاركة ثم "إضافة إلى الشاشة الرئيسية"');
+      }
     }
   </script>
 </body>
