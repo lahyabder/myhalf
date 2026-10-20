@@ -664,13 +664,14 @@
     .chat-window {
       max-width: 520px;
       width: 100%;
-      height: 600px;
+      height: min(600px, 85vh);
       background: var(--bg-surface);
       border-radius: var(--radius-lg);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-subtle);
     }
     .chat-header {
       padding: 14px 18px;
@@ -1283,6 +1284,25 @@
 
     /* Mobile-First Responsiveness */
     @media (max-width: 640px) {
+      .chat-modal {
+        padding: 0 !important;
+        align-items: flex-end !important;
+      }
+      .chat-window {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 90vh !important;
+        max-height: 90vh !important;
+        border-radius: 20px 20px 0 0 !important;
+      }
+      .install-modal {
+        padding: 0 !important;
+        align-items: flex-end !important;
+      }
+      .install-window {
+        max-width: 100% !important;
+        border-radius: 20px 20px 0 0 !important;
+      }
       .screen-selector-bar {
         padding: 6px 10px;
       }
@@ -1387,6 +1407,180 @@
         font-size: 24px;
       }
     }
+
+    /* PWA Install Modal Styles */
+    .install-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .install-window {
+      max-width: 480px;
+      width: 100%;
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .install-header {
+      padding: 16px 20px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .install-body {
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 75vh;
+    }
+    .install-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      background: var(--bg-elevated);
+      padding: 4px;
+      border-radius: var(--radius-full);
+    }
+    .install-tab-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: var(--radius-full);
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .install-tab-btn.active {
+      background: var(--color-primary);
+      color: white;
+      box-shadow: 0 2px 6px rgba(7, 104, 103, 0.3);
+    }
+    .install-guide-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .install-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--bg-canvas);
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .install-benefits {
+      background: var(--color-primary-light);
+      border: 1px solid rgba(7, 104, 103, 0.2);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+    .install-footer {
+      padding: 14px 20px;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Enhanced 2x2 Chat Modal */
+    .chat-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .chat-close-btn:hover {
+      background: var(--status-danger);
+      color: white;
+      border-color: var(--status-danger);
+    }
+    .btn-download-header {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--color-primary);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn-download-header:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+    .btn-hero-install {
+      padding: 13px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      background: var(--bg-elevated);
+      color: var(--color-primary);
+      border: 1px solid var(--border-strong);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-hero-install:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      transform: translateY(-2px);
+    }
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1422,19 +1616,19 @@
       <button class="btn-header-app" id="btnNavToggle" onclick="toggleAppMode()" title="الانتقال إلى واجهة التطبيق التفاعلية">
         <span>🚀</span> <span class="btn-text">دخول التطبيق</span>
       </button>
+      <button class="btn-download-header" onclick="openInstallModal()" title="تحميل وتثبيت التطبيق على هاتفك" id="btnHeaderInstall">
+        <span>📲</span> <span class="hide-on-mobile" style="font-size: 11px;">تحميل التطبيق</span>
+      </button>
+      <button class="icon-btn" onclick="openChatModal()" title="الدردشة المشتركة 2x2" id="btnHeaderChat">
+        <span>💬</span> <span class="hide-on-mobile" style="font-size: 11px;">الدردشة</span>
+      </button>
+      <button class="icon-btn" onclick="switchScreen('screen-notifications')" title="الإشعارات والموافقات">
+        <span>🔔</span> <span class="badge" style="background: var(--status-danger); color: white; border-radius: 50%; font-size: 10px; padding: 1px 5px; margin-inline-start: -4px;">0</span>
+      </button>
       <button class="icon-btn hide-on-mobile" onclick="openShareModal()" title="توليد بطاقة المشاركة الفاخرة">
         <span>🪪</span> <span style="font-size: 11px;">بطاقة الثنائي</span>
       </button>
-      <button class="icon-btn" onclick="switchScreen('screen-notifications')" title="الإشعارات والموافقات">
-        <span>🔔</span> <span class="badge" style="background: var(--status-danger); color: white; border-radius: 50%; font-size: 10px; padding: 1px 5px; margin-inline-start: -4px;">2</span>
-      </button>
-      <button class="icon-btn hide-on-mobile" onclick="openChatModal()" title="الدردشة المشتركة 2x2">
-        <span>💬</span> <span style="font-size: 11px;">الدردشة</span>
-      </button>
       <button class="icon-btn hide-on-mobile" onclick="toggleSound()" title="تبديل المؤثرات الصوتية التفاعلية" id="btnSound">🔊</button>
-      <button class="icon-btn hide-on-mobile" onclick="installPWA()" title="تثبيت التطبيق على جهازك" id="btnInstallApp" style="display:none; color: var(--color-primary); font-weight:700;">
-        <span>📲</span> <span style="font-size: 11px;">تثبيت</span>
-      </button>
       <select class="lang-select" id="langSelect" onchange="changeLocale(this.value)">
         <option value="ar" selected>العربية (RTL)</option>
         <option value="fr">Français</option>
@@ -1451,45 +1645,17 @@
     <div id="screen-feed" class="screen-view">
       
       <!-- Interactive Stories Bar -->
-      <div class="stories-container">
-        <div class="story-item" onclick="openStory('سارة وعمر (@sara_and_omar)', 'جولة تصوير فجرية على شاطئ الأطلسي في نواكشوط 🌅', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&fit=crop', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop')">
-          <div class="story-ring">
-            <div class="duo-avatar-box overlap">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" class="avatar-img" alt="P1">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" class="avatar-img" alt="P2">
+      <div class="stories-container" id="storiesBar">
+        <div class="story-item" onclick="showToast('📸 خاصية القصص المشتركة ستتاح تلقائياً فور توثيق الشريكين!')">
+          <div class="story-ring" style="background: var(--color-primary);">
+            <div class="duo-avatar-box" style="width: 44px; height: 44px; background: var(--bg-surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--color-primary); font-weight: 800;">
+              ➕
             </div>
           </div>
-          <span class="story-name">حسابكما</span>
+          <span class="story-name">قصة جديدة</span>
         </div>
-
-        <div class="story-item" onclick="openStory('فاطمة ومريم (@tandem_art)', 'نضع اللمسات الأخيرة على لوحتنا المشتركة 'ألوان شنقيط' 🎨✨', 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&fit=crop', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop')">
-          <div class="story-ring">
-            <div class="duo-avatar-box overlap">
-              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop" class="avatar-img" alt="P3">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" class="avatar-img" alt="P4">
-            </div>
-          </div>
-          <span class="story-name">@tandem_art</span>
-        </div>
-
-        <div class="story-item" onclick="openStory('أحمد والمختار (@desert_coders)', 'تم إطلاق النسخة التجريبية من تطبيق MYHALF بنجاح! 🚀👨‍💻', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&fit=crop', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop')">
-          <div class="story-ring">
-            <div class="duo-avatar-box overlap">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" class="avatar-img" alt="P5">
-              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop" class="avatar-img" alt="P6">
-            </div>
-          </div>
-          <span class="story-name">@desert_coders</span>
-        </div>
-
-        <div class="story-item" onclick="openStory('الشيخ ومصطفى (@sahara_flavors)', 'طاجين الحوت التقليدي في قلب صحراء تيرس زمور 🍲👌', 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&fit=crop', 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=60&h=60&fit=crop', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&h=60&fit=crop')">
-          <div class="story-ring">
-            <div class="duo-avatar-box overlap">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=60&h=60&fit=crop" class="avatar-img" alt="P7">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&h=60&fit=crop" class="avatar-img" alt="P8">
-            </div>
-          </div>
-          <span class="story-name">@sahara_flavors</span>
+        <div style="display: flex; align-items: center; padding: 0 10px; font-size: 12px; color: var(--text-tertiary);">
+          🌱 قصص الثنائيات الموثقة ستظهر هنا فور نشرها.
         </div>
       </div>
 
@@ -1513,8 +1679,8 @@
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; background: rgba(36,123,120,0.1); padding: 8px 12px; border-radius: var(--radius-md);">
           <span style="font-size: 12px; font-weight: 700;">أنت تتصفح الآن كـ:</span>
           <div style="display: flex; gap: 6px;">
-            <button class="voice-btn active" id="btnSimSarah" onclick="switchPromptActor('sarah')">سارة (الشريك 1)</button>
-            <button class="voice-btn" id="btnSimOmar" onclick="switchPromptActor('omar')">عمر (الشريك 2)</button>
+            <button class="voice-btn active" id="btnSimSarah" onclick="switchPromptActor('p1')">👤 الشريك 1</button>
+            <button class="voice-btn" id="btnSimOmar" onclick="switchPromptActor('p2')">👥 الشريك 2</button>
           </div>
         </div>
 
@@ -1524,93 +1690,25 @@
         </div>
       </div>
 
-      <!-- FEATURED STANDOUT: Interactive Two Perspectives Split-Slider Post -->
-      <div class="perspectives-card">
-        <div class="perspectives-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <div class="duo-avatar-box overlap">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" class="avatar-img" alt="Sarah">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" class="avatar-img" alt="Omar">
-            </div>
-            <div>
-              <div style="font-size: 14px; font-weight: 700;">سارة وعمر (@sara_and_omar)</div>
-              <div style="font-size: 11px; color: var(--text-secondary);">سلايدر المقارنة التفاعلي الحركي • اسحب الفاصل للمقارنة!</div>
-            </div>
-          </div>
-          <button class="btn btn-outline" style="font-size: 11px; padding: 4px 10px;" onclick="toggleFlip('flipPost1')">
-            🔄 قلب لقصة الزاويتين
+      <!-- Dynamic Posts Container (Real Live User Posts) -->
+      <div id="dynamicPostsContainer"></div>
+
+      <!-- Production Empty State -->
+      <div class="card" id="emptyFeedCard" style="text-align: center; padding: 40px 20px; border: 2px dashed var(--border-subtle);">
+        <div style="font-size: 48px; margin-bottom: 12px;">🌱</div>
+        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">مرحباً بكما في شبكة MYHALF!</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); max-width: 440px; margin: 0 auto 20px; line-height: 1.6;">
+          هذه خلاصتكم المشتركة الحية. لم يُنشر أي منشور بعد؛ كونا أول ثنائي يوثق لحظته بروايتين وعدستين متوازيتين عبر خيارات النشر التالية:
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="switchScreen('screen-create-tp')">
+            <span>➕ نشر منشور زاويتين</span>
           </button>
-        </div>
-
-        <div style="padding: 12px 18px 6px;">
-          <h4 style="font-size: 15px; font-weight: 700;">شروق الأطلسي وغروب الكثبان: رحلة حوض آرغين</h4>
-          <span style="font-size: 12px; color: var(--text-secondary);">اسحب المقبض الأوسط يميناً ويساراً لمشاهدة اختلاف زاوية سارة عن زاوية عمر:</span>
-        </div>
-
-        <div class="perspective-flip-box" id="flipPost1">
-          <div class="perspective-flip-inner">
-            
-            <!-- Front Face: Interactive Split Slider -->
-            <div class="flip-front">
-              <div class="split-slider-container" id="sliderContainer1" onmousemove="handleSliderMove(event, this)" ontouchmove="handleSliderTouch(event, this)">
-                <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&h=500&fit=crop" class="split-img" alt="Omar Perspective">
-                <span class="split-tag p2">زاوية عمر (المخيم والغروب)</span>
-
-                <div class="split-overlay" id="splitOverlay1" style="width: 50%;">
-                  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=500&fit=crop" class="split-img" style="width: 648px; max-width: none;" alt="Sarah Perspective">
-                </div>
-                <span class="split-tag p1">زاوية سارة (شروق البحر)</span>
-
-                <div class="split-handle" id="splitHandle1" style="left: 50%;">⇔</div>
-              </div>
-            </div>
-
-            <!-- Back Face: Two Narrative Perspectives -->
-            <div class="flip-back">
-              <div>
-                <h4 style="font-size: 15px; font-weight: 800; color: var(--color-primary); margin-bottom: 12px;">نص الزاويتين التشاركي الموثق</h4>
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                  <div style="background: var(--color-primary-light); padding: 12px; border-radius: var(--radius-md);">
-                    <strong>سارة:</strong> "التقاط الشروق عند الرابعة فجراً كان قمة الهدوء، الألوان كانت تمتزج بشكل ساحر."
-                  </div>
-                  <div style="background: var(--color-secondary-light); padding: 12px; border-radius: var(--radius-md);">
-                    <strong>عمر:</strong> "بينما كانت سارة تلتقط الصور، كنت أصلح خيمة المبيت وأعد شاي الصباح الصحراوي الحار."
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-outline btn-full" style="margin-top: 14px;" onclick="toggleFlip('flipPost1')">
-                العودة لسلايدر المقارنة البصري ↩
-              </button>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="perspectives-footer">
-          <div style="display: flex; gap: 16px;">
-            <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="likePost(this)">
-              <span class="nav-icon">❤️</span> <span class="like-count">620</span>
-            </button>
-            <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="toggleComments('comments-split-1')">
-              <span class="nav-icon">💬</span> <span>42</span>
-            </button>
-            <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="openShareModal()">
-              <span class="nav-icon">🪪</span> <span>بطاقة المشاركة</span>
-            </button>
-          </div>
-          <button class="btn btn-outline" style="font-size: 11px; padding: 4px 8px;" onclick="openChatModal()">
-            دردشة مع الثنائي 💬
+          <button class="btn btn-outline" onclick="switchScreen('screen-create-post')">
+            <span>✍️ كتابة منشور عادي</span>
           </button>
-        </div>
-
-        <div class="comments-tray" id="comments-split-1">
-          <div class="comment-item">
-            <span class="comment-author">@tandem_art:</span>
-            <span class="comment-text">فكرة سلايدر مقارنة الزوايا هذه خيالية! تظهر جمال تكامل الرؤيتين في صورة واحدة.</span>
-          </div>
         </div>
       </div>
-
     </div>
 
     <!-- Screen 07: Duo Public Profile with Milestones Timeline -->
@@ -1630,10 +1728,10 @@
             </div>
           </div>
 
-          <h3 style="font-size: 22px; font-weight: 800;">سارة وعمر</h3>
-          <div style="font-size: 13px; color: var(--color-primary); font-weight: 700; margin-bottom: 8px;">@sara_and_omar • شركاء إبداع وتصميم 🎨</div>
-          <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
-            شخصان، حساب واحد، عينان ترى العالم باختلاف ويتحدان في الجمال.
+          <h3 id="profileDisplayName" style="font-size: 22px; font-weight: 800;">حساب الثنائي</h3>
+          <div id="profileHandle" style="font-size: 13px; color: var(--color-primary); font-weight: 700; margin-bottom: 8px;">@our_duo • ثنائي موثق 🤝</div>
+          <p id="profileBio" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">
+            شخصان، حساب واحد، ملكية متساوية 50/50.
           </p>
 
           <!-- Milestones & Memory Timeline -->
@@ -1710,6 +1808,9 @@
             <button class="btn btn-hero-secondary" onclick="switchScreen('screen-feed')">
               <span>🚀 جرّب واجهة التطبيق الحية</span>
             </button>
+            <button class="btn btn-hero-install" onclick="openInstallModal()" title="تحميل وتثبيت التطبيق على هاتفك">
+              <span>📲</span> <span>تحميل التطبيق على الهاتف</span>
+            </button>
           </div>
 
           <!-- Live Interactive Tactile Demo Card right in the Hero -->
@@ -1720,7 +1821,7 @@
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" class="avatar-img" alt="P2">
               </div>
               <div style="flex: 1; margin-inline-start: 10px;">
-                <div style="font-weight: 800; font-size: 15px;">سارة وعمر (@sara_and_omar)</div>
+                <div style="font-weight: 800; font-size: 15px;">نموذج لمنشور الزاويتين التفاعلي (@our_half)</div>
                 <div style="font-size: 11px; color: var(--text-secondary);">معاينة حية تفاعلية • اسحب المقبض في الوسط ⇔</div>
               </div>
               <span class="preview-tag">منشور الزاويتين</span>
@@ -1728,13 +1829,13 @@
 
             <!-- The Interactive Split Slider -->
             <div class="split-slider-container" onmousemove="handleSliderMove(event, this)" ontouchmove="handleSliderTouch(event, this)">
-              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1000&h=600&fit=crop" class="split-img" alt="عمر">
-              <span class="split-tag p2">عدسة عمر (لحظة الهدوء)</span>
+              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1000&h=600&fit=crop" class="split-img" alt="الشريك 2">
+              <span class="split-tag p2">عدسة الشريك 2 (لحظة الهدوء)</span>
 
               <div class="split-overlay" style="width: 50%;">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&h=600&fit=crop" class="split-img" alt="سارة">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&h=600&fit=crop" class="split-img" alt="الشريك 1">
               </div>
-              <span class="split-tag p1">عدسة سارة (شروق الأطلسي)</span>
+              <span class="split-tag p1">عدسة الشريك 1 (شروق الأطلسي)</span>
 
               <div class="split-handle" style="left: 50%;">⇔</div>
             </div>
@@ -1866,6 +1967,7 @@
               <p>شبكة الحسابات المشتركة بملكية متساوية وحوكمة مزدوجة.</p>
             </div>
             <div class="footer-links">
+              <a href="#" onclick="openInstallModal(); return false;">📲 تثبيت التطبيق على الهاتف (PWA)</a>
               <a href="#" onclick="openTermsModal(); return false;">ميثاق الملكية والشروط</a>
               <a href="#" onclick="switchScreen('screen-safety'); return false;">دليل الأمان وحالات الطوارئ</a>
               <a href="#" onclick="switchScreen('screen-feed'); return false;">دخول واجهة التطبيق</a>
@@ -1916,7 +2018,7 @@
           <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); font-size: 32px; margin-bottom: 12px;">🤝</div>
           <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">ميثاق الملكية المتساوية ومصادقة الشراكة</h2>
           <div style="font-size: 13px; color: var(--text-secondary);">
-            دعوة من <strong style="color: var(--color-primary);">عمر الفاسي (@omar)</strong> لتأسيس الحساب المشترك بالتساوي
+            دعوة من <strong id="acceptPartnerName" style="color: var(--color-primary);">الشريك المؤسس</strong> لتأسيس الحساب المشترك بالتساوي
           </div>
         </div>
 
@@ -1955,7 +2057,7 @@
         <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
           <input type="checkbox" id="chkAcceptTerms" style="width: 18px; height: 18px; accent-color: var(--color-primary); cursor: pointer; margin-top: 2px;">
           <label for="chkAcceptTerms" style="font-size: 12px; font-weight: 700; color: var(--text-primary); cursor: pointer; line-height: 1.5;">
-            أقر بأنني قرأت وفهمت ميثاق الملكية المتساوية وشروط الخدمة، وأوافق على مشاركة ملكية الحساب مناصفة مع عمر الفاسي بمسؤولية تضامنية.
+            أقر بأنني قرأت وفهمت ميثاق الملكية المتساوية وشروط الخدمة، وأوافق على مشاركة ملكية الحساب مناصفة مع الشريك بمسؤولية تضامنية متكافئة 50/50.
           </label>
         </div>
 
@@ -1983,13 +2085,13 @@
 
         <div style="margin-bottom: 14px;">
           <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">معرّف الحساب الفريد (@handle):</label>
-          <input type="text" id="setupHandle" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);" value="sara_and_omar">
+          <input type="text" id="setupHandle" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);" placeholder="مثال: our_duo">
           <div style="font-size: 11px; color: var(--status-success); margin-top: 4px;">✓ المعرف متاح ومستوفٍ لشروط التسمية</div>
         </div>
 
         <div style="margin-bottom: 14px;">
           <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">الاسم الظاهر للثنائي:</label>
-          <input type="text" id="setupDisplayName" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);" value="سارة وعمر">
+          <input type="text" id="setupDisplayName" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);" placeholder="مثال: حساب الثنائي">
         </div>
 
         <div style="margin-bottom: 14px;">
@@ -2005,7 +2107,7 @@
 
         <div style="margin-bottom: 20px;">
           <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">نبذة الحساب المشترك (Bio):</label>
-          <textarea class="form-input" style="width: 100%; height: 75px; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary); resize: none;">شخصان. حساب واحد. رحلتنا وإبداعاتنا المشتركة بين نواكشوط والدار البيضاء.</textarea>
+          <textarea id="setupBio" class="form-input" style="width: 100%; height: 75px; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary); resize: none;" placeholder="اكتب نبذة تلخص قصة شراكتكما ورؤيتكما المشتركة..."></textarea>
         </div>
 
         <button class="btn btn-primary btn-full" style="padding: 12px;" onclick="saveIdentityAndEnter()">
@@ -2020,8 +2122,8 @@
           <h3 style="font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
             <span>✍️</span> إنشاء منشور جديد باسم الثنائي
           </h3>
-          <span style="font-size: 11px; background: var(--bg-elevated); padding: 4px 10px; border-radius: var(--radius-full); color: var(--text-secondary);">
-            يُنشر على @sara_and_omar
+          <span id="composerDuoTag" style="font-size: 11px; background: var(--bg-elevated); padding: 4px 10px; border-radius: var(--radius-full); color: var(--text-secondary);">
+            يُنشر على @our_duo
           </span>
         </div>
 
@@ -2029,8 +2131,8 @@
           <label style="font-size: 12px; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 6px;">اختر صوت المنشور:</label>
           <div style="display: flex; gap: 8px;">
             <button class="voice-btn active" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--color-primary); background: var(--color-primary-light); color: var(--color-primary); cursor: pointer;" onclick="selectComposerVoice(this, 'صوت موحد للثنائي')">🤝 صوت الثنائي الموحد</button>
-            <button class="voice-btn" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); cursor: pointer;" onclick="selectComposerVoice(this, 'سارة')">👩 سارة</button>
-            <button class="voice-btn" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); cursor: pointer;" onclick="selectComposerVoice(this, 'عمر')">👨 عمر</button>
+            <button class="voice-btn" id="btnVoiceP1" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); cursor: pointer;" onclick="selectComposerVoice(this, 'الشريك 1')">👤 الشريك 1</button>
+            <button class="voice-btn" id="btnVoiceP2" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); cursor: pointer;" onclick="selectComposerVoice(this, 'الشريك 2')">👥 الشريك 2</button>
           </div>
         </div>
 
@@ -2061,15 +2163,19 @@
           المنشور الثوري الذي يسمح للمتابعين بسحب الشريط التفاعلي 50/50 لمشاهدة وجهتي نظركما لنفس اللحظة.
         </p>
 
+        <div style="margin-bottom: 12px;">
+          <label style="font-size: 12px; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 4px;">عنوان اللحظة المشتركة:</label>
+          <input type="text" id="tpPostTitle" class="form-input" placeholder="مثال: رحلتنا الأولى أو لقطتان لغروب واحد..." style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary); font-family: inherit;">
+        </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
           <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-md); border-top: 3px solid var(--color-primary);">
-            <div style="font-size: 13px; font-weight: 800; margin-bottom: 6px; color: var(--color-primary);">زاوية سارة (Partner 1)</div>
-            <textarea class="form-input" style="width: 100%; height: 75px; font-size: 11px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--bg-surface); color: var(--text-primary);" placeholder="انطباعك يا سارة..."></textarea>
+            <div style="font-size: 13px; font-weight: 800; margin-bottom: 6px; color: var(--color-primary);">زاوية الشريك 1 (Partner 1)</div>
+            <textarea id="tpPartner1Text" class="form-input" style="width: 100%; height: 75px; font-size: 11px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--bg-surface); color: var(--text-primary);" placeholder="روايتك وانطباعك للحدث بعدستك الخاصة..."></textarea>
             <button class="btn btn-outline" style="width: 100%; font-size: 11px; padding: 5px;" onclick="showToast('📷 تم ربط صورة الزاوية الأولى')">📷 صورة الزاوية 1</button>
           </div>
           <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-md); border-top: 3px solid var(--color-secondary);">
-            <div style="font-size: 13px; font-weight: 800; margin-bottom: 6px; color: var(--color-secondary);">زاوية عمر (Partner 2)</div>
-            <textarea class="form-input" style="width: 100%; height: 75px; font-size: 11px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--bg-surface); color: var(--text-primary);" placeholder="انطباعك يا عمر..."></textarea>
+            <div style="font-size: 13px; font-weight: 800; margin-bottom: 6px; color: var(--color-secondary);">زاوية الشريك 2 (Partner 2)</div>
+            <textarea id="tpPartner2Text" class="form-input" style="width: 100%; height: 75px; font-size: 11px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--bg-surface); color: var(--text-primary);" placeholder="رواية وانطباع الشريك الثاني لنفس اللحظة..."></textarea>
             <button class="btn btn-outline" style="width: 100%; font-size: 11px; padding: 5px;" onclick="showToast('📷 تم ربط صورة الزاوية الثانية')">📷 صورة الزاوية 2</button>
           </div>
         </div>
@@ -2096,49 +2202,20 @@
 
         <!-- Duo Cards List -->
         <div style="display: flex; flex-direction: column; gap: 12px;">
-          <!-- Duo Card 1 -->
-          <div class="card" style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <div class="duo-avatar-box overlap">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" class="avatar-img" alt="K">
-                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=60&h=60&fit=crop" class="avatar-img" alt="Y">
-              </div>
-              <div>
-                <div style="font-size: 14px; font-weight: 800;">كريم ويوسف (@tech_duo)</div>
-                <div style="font-size: 11px; color: var(--text-secondary);">مؤسسان تقنيان • 🔥 19 يوماً تفاعل</div>
-              </div>
+          <div class="card" style="text-align: center; padding: 36px 20px; border: 2px dashed var(--border-subtle); background: var(--bg-elevated);">
+            <div style="font-size: 40px; margin-bottom: 12px;">🌟</div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">دليل الثنائيات المعتمدة</h3>
+            <p style="font-size: 13px; color: var(--text-secondary); max-width: 440px; margin: 0 auto 16px; line-height: 1.6;">
+              شبكة MYHALF ترحب بكما! هذا الدليل سيعرض الحسابات الموثقة فور اكتمال ميثاق الشراكة. كونا أول ثنائي معتمد يظهر هنا!
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+              <button class="btn btn-primary" onclick="switchScreen('screen-invite')">
+                <span>💌 دعوة الشريك للانضمام</span>
+              </button>
+              <button class="btn btn-outline" onclick="openShareModal()">
+                <span>🪪 مشاركة بطاقة الحساب</span>
+              </button>
             </div>
-            <button class="btn btn-secondary" style="font-size: 11px; padding: 6px 14px;" onclick="toggleFollowDuo(this)">متابعة</button>
-          </div>
-
-          <!-- Duo Card 2 -->
-          <div class="card" style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <div class="duo-avatar-box overlap">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop" class="avatar-img" alt="F">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" class="avatar-img" alt="M">
-              </div>
-              <div>
-                <div style="font-size: 14px; font-weight: 800;">فاطمة ومريم (@tandem_art)</div>
-                <div style="font-size: 11px; color: var(--text-secondary);">ثنائي فني تشكيلي • 🔥 56 يوماً تفاعل</div>
-              </div>
-            </div>
-            <button class="btn btn-secondary" style="font-size: 11px; padding: 6px 14px;" onclick="toggleFollowDuo(this)">متابعة</button>
-          </div>
-
-          <!-- Duo Card 3 -->
-          <div class="card" style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 12px;">
-              <div class="duo-avatar-box overlap">
-                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=60&h=60&fit=crop" class="avatar-img" alt="Z">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" class="avatar-img" alt="T">
-              </div>
-              <div>
-                <div style="font-size: 14px; font-weight: 800;">زياد وطارق (@summit_climbers)</div>
-                <div style="font-size: 11px; color: var(--text-secondary);">رحالة ومستكشفو جبال • 🔥 88 يوماً</div>
-              </div>
-            </div>
-            <button class="btn btn-secondary" style="font-size: 11px; padding: 6px 14px;" onclick="toggleFollowDuo(this)">متابعة</button>
           </div>
         </div>
       </div>
@@ -2157,81 +2234,22 @@
     </div>
 
     <div id="screen-notifications" class="screen-view">
-      <div class="card">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-          <h3 style="font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
-            <span>🔔</span> التنبيهات وإشعارات الثنائي
-          </h3>
-          <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 3px 8px; border-radius: var(--radius-full); font-weight: 700;">2 غير مقروء</span>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <!-- Notification 1 -->
-          <div style="background: var(--color-primary-light); border-inline-start: 4px solid var(--color-primary); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;" onclick="switchScreen('screen-approvals')">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-              <span style="font-size: 12px; font-weight: 800; color: var(--color-primary);">⚖️ طلب موافقة مزدوجة عاجل</span>
-              <span style="font-size: 10px; color: var(--text-tertiary);">منذ 15 دقيقة</span>
-            </div>
-            <div style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">اقترح شريكك (عمر) تعديل النبذة التعريفية للحساب. اضغط للمعاينة والاعتماد.</div>
-          </div>
-
-          <!-- Notification 2 -->
-          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;" onclick="switchScreen('screen-feed')">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-              <span style="font-size: 12px; font-weight: 800; color: var(--color-secondary);">⚡ إجابة سؤال اليوم المشترك</span>
-              <span style="font-size: 10px; color: var(--text-tertiary);">منذ ساعتين</span>
-            </div>
-            <div style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">أجاب عمر للتو على سؤال اليوم! أكمل إجابتك الآن لكشف كلا الإجابتين معاً.</div>
-          </div>
-
-          <!-- Notification 3 -->
-          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;" onclick="openChatModal()">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-              <span style="font-size: 12px; font-weight: 800;">💬 رسالة في محادثة 2x2</span>
-              <span style="font-size: 10px; color: var(--text-tertiary);">أمس</span>
-            </div>
-            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">أرسل الثنائي فاطمة ومريم (@tandem_art) رداً في محادثتكم الرباعية.</div>
-          </div>
-
-          <!-- Notification 4 -->
-          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-              <span style="font-size: 12px; font-weight: 800; color: #E65100;">🔥 مستوى تفاعل جديد!</span>
-              <span style="font-size: 10px; color: var(--text-tertiary);">منذ يومين</span>
-            </div>
-            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">وصلتما إلى 43 يوماً متواصلاً من التفاعل! تم منحكما شارة الثنائي المتناغم.</div>
-          </div>
-        </div>
+      <div class="card" style="text-align: center; padding: 48px 20px;">
+        <div style="font-size: 44px; margin-bottom: 12px;">🔔</div>
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">صندوق الإشعارات فارغ</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); max-width: 400px; margin: 0 auto; line-height: 1.6;">
+          كافة الإشعارات المتبادلة وطلبات التوقيع المزدوج وتفاعلات المتابعين ستظهر لكما هنا فور حدوثها.
+        </p>
       </div>
     </div>
 
     <div id="screen-approvals" class="screen-view">
-      <div class="card">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-          <h3 style="font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
-            <span>⚖️</span> سجل الحوكمة والموافقة المزدوجة (Dual Approval)
-          </h3>
-          <span style="font-size: 11px; background: var(--bg-elevated); padding: 3px 8px; border-radius: var(--radius-full);">SHA-256 محمي</span>
-        </div>
-        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">
-          أي تعديل حساس في الحساب (تغيير المعرف، النبذة، تفكيك الشراكة، أو تصدير الأرشيف) يتطلب توقيع الشريكين معاً منعاً للاستفراد أو السيطرة الأحادية.
+      <div class="card" style="text-align: center; padding: 48px 20px;">
+        <div style="font-size: 44px; margin-bottom: 12px;">⚖️</div>
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">لا توجد مقترحات معلقة حالياً</h3>
+        <p style="font-size: 13px; color: var(--text-secondary); max-width: 420px; margin: 0 auto; line-height: 1.6;">
+          حسابكما في حالة تناغم تام بنسبة 50/50. عندما يقترح أحد الشريكين تعديلاً على المعرف أو النبذة أو الحساب، سيظهر المقترح هنا للتوقيع المزدوج.
         </p>
-
-        <!-- Active Proposal Card -->
-        <div id="activeProposalCard" style="background: var(--bg-elevated); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--color-primary); margin-bottom: 14px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-            <div style="font-size: 13px; font-weight: 800; color: var(--color-primary);">مقترح تعديل نبذة الحساب المشترك</div>
-            <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 2px 8px; border-radius: var(--radius-full); font-weight: 700;">بانتظار موافقتك</span>
-          </div>
-          <div style="font-size: 11px; color: var(--text-tertiary); margin-bottom: 8px; font-family: monospace;">Hash: 8f4a9b2c1e... (صالحة لـ 44 ساعة)</div>
-          <div style="background: var(--bg-surface); padding: 10px; border-radius: var(--radius-sm); font-size: 12px; margin-bottom: 14px; border: 1px solid var(--border-subtle);">
-            <strong>النبذة المقترحة:</strong> "شخصان. حساب واحد. رحلتنا وإبداعاتنا المشتركة بين نواكشوط والدار البيضاء مع إطلاق استوديو التصوير الجديد 📸"
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <button class="btn btn-primary" style="flex: 2;" onclick="approveProposalDirect()">✅ اعتماد وتوقيع المقترح</button>
-            <button class="btn btn-outline" style="flex: 1; border-color: var(--status-danger); color: var(--status-danger);" onclick="rejectProposalDirect()">❌ رفض</button>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -2242,6 +2260,15 @@
         </h3>
 
         <div style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Option: Install App on Phone -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <div style="font-size: 14px; font-weight: 700;">تحميل وتثبيت التطبيق على هاتفك (PWA)</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">سرعة فائقة، فتح من الشاشة الرئيسية، وتنبيهات فورية</div>
+            </div>
+            <button class="btn btn-primary" style="font-size: 12px; padding: 6px 14px;" onclick="openInstallModal()">📲 تثبيت على الهاتف</button>
+          </div>
+
           <!-- Option: Privacy -->
           <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
             <div>
@@ -2442,26 +2469,26 @@
   </nav>
 
   <!-- 2x2 Duo Chat Modal -->
-  <div class="chat-modal" id="chatModal" onclick="closeChatModal(event)">
+  <div class="chat-modal" id="chatModal" onclick="handleChatBackdropClick(event)">
     <div class="chat-window" onclick="event.stopPropagation()">
       <div class="chat-header">
         <div style="display: flex; align-items: center; gap: 10px;">
           <div class="duo-avatar-box overlap">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&fit=crop" class="avatar-img" alt="P3">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop" class="avatar-img" alt="P4">
+            <img src="/icon.svg" class="avatar-img" style="width: 36px; height: 36px; border-radius: 50%;" alt="P1">
+            <img src="/logo.png" class="avatar-img" style="width: 36px; height: 36px; border-radius: 50%; background: var(--bg-surface); object-fit: contain; margin-inline-start: -14px;" alt="P2">
           </div>
           <div>
-            <div style="font-size: 14px; font-weight: 700;">دردشة مع: فاطمة ومريم (@tandem_art)</div>
-            <div style="font-size: 11px; color: var(--status-success);">ثنائي نشط الآن • دردشة رباعية 2x2</div>
+            <div style="font-size: 14px; font-weight: 700;">محادثة الثنائيات 2x2</div>
+            <div style="font-size: 11px; color: var(--status-success);">🟢 اتصال مشفر نشط • شريكان لكل طرف</div>
           </div>
         </div>
-        <button style="background: none; border: none; font-size: 20px; cursor: pointer;" onclick="closeChatDirect()">✕</button>
+        <button class="chat-close-btn" onclick="closeChatDirect()" title="إغلاق المحادثة">✕</button>
       </div>
 
       <div class="chat-body" id="chatMessages">
         <div class="chat-msg theirs">
-          <div style="font-size: 10px; font-weight: 700; color: var(--color-primary); margin-bottom: 2px;">مريم (باسم الثنائي @tandem_art):</div>
-          مرحباً سارة وعمر! أعجبنا منشوركما الأخير عن رحلة حوض آرغين، هل يمكننا التنسيق لمعرض مشترك في نواكشوط الشهر المقبل؟
+          <div style="font-size: 10px; font-weight: 700; color: var(--color-primary); margin-bottom: 2px;">نظام MYHALF الموحد:</div>
+          أهلاً بكما في فضاء المحادثة الرباعية 2x2! هنا يمكنكما التحدث مع ثنائيات أخرى كشخصين مستقلين أو بالصوت الموحد للثنائي 👥.
         </div>
       </div>
 
@@ -2469,15 +2496,88 @@
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <span style="font-size: 11px; font-weight: 700; color: var(--text-secondary);">التحدث بصوت:</span>
           <div class="voice-selector-bar">
-            <button class="voice-btn active" onclick="setVoice(this, 'سارة (صوت فردي)')">سارة</button>
-            <button class="voice-btn" onclick="setVoice(this, 'عمر (صوت فردي)')">عمر</button>
-            <button class="voice-btn" onclick="setVoice(this, 'سارة وعمر (صوت الثنائي الموحد)')">صوت الثنائي الموحد 👥</button>
+            <button class="voice-btn active" onclick="setVoice(this, 'الشريك 1 (صوت فردي)')">الشريك 1</button>
+            <button class="voice-btn" onclick="setVoice(this, 'الشريك 2 (صوت فردي)')">الشريك 2</button>
+            <button class="voice-btn" onclick="setVoice(this, 'صوت الثنائي الموحد 👥')">صوت الثنائي الموحد 👥</button>
           </div>
         </div>
         <div style="display: flex; gap: 8px;">
-          <input type="text" class="form-input" id="chatInput" placeholder="اكتب رسالتك..." onkeydown="if(event.key==='Enter') sendChatMessage()">
-          <button class="btn btn-primary" onclick="sendChatMessage()">إرسال</button>
+          <input type="text" class="form-input" id="chatInput" placeholder="اكتب رسالتك هنا..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+          <button class="btn btn-primary" style="padding: 10px 18px; font-weight: 700; flex-shrink: 0;" onclick="sendChatMessage()">إرسال</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile PWA Download & Installation Modal -->
+  <div class="install-modal" id="installModal" onclick="handleInstallBackdropClick(event)">
+    <div class="install-window" onclick="event.stopPropagation()">
+      <div class="install-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="/icon.svg" style="width: 40px; height: 40px; border-radius: 10px;" alt="MYHALF App">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary); margin: 0;">تثبيت MYHALF على هاتفك</h3>
+            <span style="font-size: 11px; color: var(--color-primary); font-weight: 700;">تطبيق ويب تقدمي رسمي (PWA) • مجاني وفوري</span>
+          </div>
+        </div>
+        <button class="chat-close-btn" onclick="closeInstallModal()" title="إغلاق">✕</button>
+      </div>
+
+      <div class="install-body">
+        <div class="install-tabs">
+          <button class="install-tab-btn active" id="tabBtnIos" onclick="switchInstallTab('ios')">🍎 أجهزة iPhone و iPad</button>
+          <button class="install-tab-btn" id="tabBtnAndroid" onclick="switchInstallTab('android')">🤖 أجهزة Android</button>
+        </div>
+
+        <!-- iOS Instructions -->
+        <div id="installIosGuide" class="install-guide-box">
+          <div class="install-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              اضغط على أيقونة <strong>المشاركة (Share) ⎋</strong> في متصفح Safari بأسفل شاشة الآيفون.
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              مرر للأسفل في القائمة واختر <strong>«إضافة إلى الشاشة الرئيسية» (Add to Home Screen) ➕</strong>.
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              اضغط على <strong>«إضافة» (Add)</strong> في الزاوية العلوية، وسيظهر تطبيق MYHALF على شاشة هاتفك الرئيسية فوراً كأي تطبيق أصيل!
+            </div>
+          </div>
+        </div>
+
+        <!-- Android Instructions -->
+        <div id="installAndroidGuide" class="install-guide-box" style="display: none;">
+          <div class="install-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              اضغط على زر <strong>«تثبيت التطبيق الآن»</strong> بالأسفل للحصول على التطبيق بضغطة واحدة.
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              أو اضغط على <strong>النقاط الثلاث ⋮</strong> في متصفح Chrome ثم اختر <strong>«تثبيت التطبيق» (Install App)</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div class="install-benefits">
+          <div class="benefit-item">⚡ <strong>سرعة فائقة:</strong> استجابة لحظية بدون الحاجة لتحميل متجر التطبيقات.</div>
+          <div class="benefit-item">🔔 <strong>إشعارات فورية:</strong> موافقات وتنبيهات الشريك في وقتها الحقيقي.</div>
+          <div class="benefit-item">🔒 <strong>أمان وتشفير:</strong> حماية تامة لكافة لحظاتكما المشتركة.</div>
+        </div>
+      </div>
+
+      <div class="install-footer">
+        <button class="btn btn-primary btn-full" id="btnTriggerDirectInstall" onclick="executeDirectPWAInstall()">
+          <span>📲 تثبيت التطبيق الآن على جهازك</span>
+        </button>
       </div>
     </div>
   </div>
@@ -2492,8 +2592,8 @@
         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid white; object-fit: cover; margin-inline-start: -20px;" alt="P2">
       </div>
 
-      <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">سارة وعمر</h3>
-      <div style="font-size: 14px; color: #FAECE6; font-weight: 700; margin-bottom: 14px;">@sara_and_omar</div>
+      <h3 id="shareDuoName" style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">حساب الثنائي</h3>
+      <div id="shareDuoHandle" style="font-size: 14px; color: #FAECE6; font-weight: 700; margin-bottom: 14px;">@our_duo</div>
       
       <p style="font-size: 12px; line-height: 1.5; opacity: 0.9; margin-bottom: 20px;">
         "شخصان. حساب واحد. ملكية متساوية."<br>
@@ -2603,17 +2703,51 @@
       console.warn('[MYHALF] Running with offline fallback data', e);
     }
 
+    // ==========================================
+    // 👥 Current Duo State Management
+    // ==========================================
+    window.currentDuo = {
+      handle: '@our_duo',
+      displayName: 'حساب الثنائي',
+      bio: 'شخصان، حساب واحد، ملكية متساوية 50/50.',
+      archetype: 'couples'
+    };
+
+    try {
+      const savedDuo = localStorage.getItem('myhalf_current_duo');
+      if (savedDuo) {
+        window.currentDuo = JSON.parse(savedDuo);
+      }
+    } catch (e) {}
+
+    function applyCurrentDuoToUI() {
+      const duo = window.currentDuo;
+      const pName = document.getElementById('profileDisplayName');
+      if (pName) pName.innerText = duo.displayName || 'حساب الثنائي';
+      const pHandle = document.getElementById('profileHandle');
+      if (pHandle) pHandle.innerText = (duo.handle || '@our_duo') + ' • ثنائي موثق 🤝';
+      const pBio = document.getElementById('profileBio');
+      if (pBio) pBio.innerText = duo.bio || 'شخصان، حساب واحد، ملكية متساوية 50/50.';
+      const sName = document.getElementById('shareDuoName');
+      if (sName) sName.innerText = duo.displayName || 'حساب الثنائي';
+      const sHandle = document.getElementById('shareDuoHandle');
+      if (sHandle) sHandle.innerText = duo.handle || '@our_duo';
+      const compTag = document.getElementById('composerDuoTag');
+      if (compTag) compTag.innerText = 'يُنشر على ' + (duo.handle || '@our_duo');
+    }
+
     // Prompt State Machine
     const promptState = {
-      currentActor: 'sarah', // 'sarah' | 'omar'
-      sarahAnswer: 'عندما نسيت مفتاح الكاميرا الاحتياطي واضطررنا للسير 5 كيلومترات في رمال وادان نضحك على حظنا!',
-      omarAnswer: '',
+      currentActor: 'p1', // 'p1' | 'p2'
+      p1Answer: '',
+      p2Answer: '',
       isRevealed: false,
-      streakDays: 42
+      streakDays: 1
     };
 
     function renderPromptWidget() {
       const area = document.getElementById('promptContentArea');
+      if (!area) return;
       
       if (promptState.isRevealed) {
         // Both answers revealed!
@@ -2625,72 +2759,131 @@
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
               <div style="background: var(--color-primary-light); padding: 10px; border-radius: var(--radius-sm);">
-                <strong>زاوية سارة:</strong> "${promptState.sarahAnswer}"
+                <strong style="color: var(--color-primary);">زاوية الشريك 1:</strong> "${promptState.p1Answer}"
               </div>
               <div style="background: var(--color-secondary-light); padding: 10px; border-radius: var(--radius-sm);">
-                <strong>زاوية عمر:</strong> "${promptState.omarAnswer}"
+                <strong style="color: var(--color-secondary);">زاوية الشريك 2:</strong> "${promptState.p2Answer}"
               </div>
             </div>
-            <button class="btn btn-outline btn-full" style="margin-top: 12px; font-size: 12px;" onclick="showToast('تم نشر إجابة اليوم في الخلاصة كمنشور زاويتين مصغر!')">
-              نشر الإجابتين في الخلاصة كمنشور زاويتين مصغر 🚀
+            <button class="btn btn-outline btn-full" style="margin-top: 12px; font-size: 12px;" onclick="showToast('تم نشر إجابة اليوم في الخلاصة كمنشور زاويتين!')">
+              نشر الإجابتين في الخلاصة كمنشور زاويتين 🚀
             </button>
           </div>
         `;
         return;
       }
 
-      if (promptState.currentActor === 'sarah') {
-        // Sarah viewing
-        area.innerHTML = `
-          <div>
-            <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">إجابتك المحفوظة (سارة):</div>
-            <div style="background: var(--bg-surface); padding: 10px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 12px; border: 1px solid var(--border-subtle);">
-              "${promptState.sarahAnswer}"
+      if (promptState.currentActor === 'p1') {
+        if (!promptState.p1Answer) {
+          area.innerHTML = `
+            <div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--color-primary); display: block; margin-bottom: 6px;">اكتب إجابتك كـ (الشريك 1) لحفظها مشفرة:</label>
+                <textarea class="form-textarea" id="p1InputText" rows="2" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); padding: 8px; background: var(--bg-surface); color: var(--text-primary); font-family: inherit; font-size: 13px;" placeholder="اكتب إجابتك هنا... لن تظهر للشريك 2 حتى يكتب إجابته!"></textarea>
+              </div>
+              <button class="btn btn-primary btn-full" onclick="submitP1Answer()">
+                🔒 حفظ إجابتي المشفرة بخصوصية عمياء
+              </button>
             </div>
-            <div class="blind-box blurred">
-              🔒 إجابة عمر مشفرة ولن تظهر حتى يكتب إجابته هو أيضاً في هاتفه!
+          `;
+        } else {
+          area.innerHTML = `
+            <div>
+              <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">إجابتك المحفوظة (الشريك 1):</div>
+              <div style="background: var(--bg-surface); padding: 10px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                "${promptState.p1Answer}"
+              </div>
+              <div class="blind-box blurred">
+                🔒 إجابة الشريك 2 مشفرة ولن تظهر حتى يكتب إجابته هو أيضاً في هاتفه!
+              </div>
+              <span style="font-size: 11px; color: var(--text-secondary);">⏳ بانتظار إجابة الشريك 2 لكشف الزاويتين سوياً...</span>
             </div>
-            <span style="font-size: 11px; color: var(--text-secondary);">⏳ بانتظار إجابة عمر لكشف الزاويتين سوياً...</span>
-          </div>
-        `;
+          `;
+        }
       } else {
-        // Omar viewing (Needs to answer to reveal!)
-        area.innerHTML = `
-          <div>
-            <div class="blind-box" style="background: #FFF8E1; border-color: #FFA000; margin-bottom: 12px;">
-              <strong>🔔 سارة كتبت إجابتها وتنتظرك!</strong>
-              <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">إجابة سارة مشفرة تماماً الآن ولن تستطيع قراءتها إلا بعد كتابة إجابتك أنت!</div>
+        if (!promptState.p2Answer) {
+          const p1Notice = promptState.p1Answer
+            ? `<div class="blind-box" style="background: #FFF8E1; border-color: #FFA000; margin-bottom: 12px;">
+                <strong>🔔 الشريك 1 كتب إجابته وينتظرك!</strong>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">إجابة الشريك 1 مشفرة تماماً ولن تُكشف إلا بعد كتابة إجابتك أنت!</div>
+              </div>`
+            : `<div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">الشريك 1 لم يُجب بعد. يمكنك المبادرة بالإجابة:</div>`;
+          area.innerHTML = `
+            <div>
+              ${p1Notice}
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label class="form-label" style="font-size: 12px; font-weight: 700; color: var(--color-secondary); display: block; margin-bottom: 6px;">اكتب إجابتك كـ (الشريك 2):</label>
+                <textarea class="form-textarea" id="p2InputText" rows="2" style="width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); padding: 8px; background: var(--bg-surface); color: var(--text-primary); font-family: inherit; font-size: 13px;" placeholder="اكتب إجابتك هنا..."></textarea>
+              </div>
+              <button class="btn btn-secondary btn-full" onclick="submitP2Answer()">
+                إرسال إجابتي وكشف الزاويتين الآن 🔓✨
+              </button>
             </div>
-            <div class="form-group" style="margin-bottom: 10px;">
-              <label class="form-label">اكتب إجابتك يا عمر لكشف الزاويتين:</label>
-              <textarea class="form-textarea" id="omarInputText" rows="2" placeholder="اكتب موقفك هنا...">${promptState.omarAnswer || 'أذكر عندما علقنا في الرمال وسارة مصرة تلتقط صور الجمال بدلاً من مساعدتي في الدفع!'}</textarea>
+          `;
+        } else {
+          area.innerHTML = `
+            <div>
+              <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 6px;">إجابتك المحفوظة (الشريك 2):</div>
+              <div style="background: var(--bg-surface); padding: 10px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+                "${promptState.p2Answer}"
+              </div>
+              <div class="blind-box blurred">
+                🔒 إجابة الشريك 1 مشفرة ولن تظهر حتى يكتب إجابته!
+              </div>
+              <span style="font-size: 11px; color: var(--text-secondary);">⏳ بانتظار إجابة الشريك 1 لكشف الزاويتين سوياً...</span>
             </div>
-            <button class="btn btn-secondary btn-full" onclick="submitOmarAnswer()">
-              إرسال إجابتي وكشف الزاويتين الآن 🔓✨
-            </button>
-          </div>
-        `;
+          `;
+        }
       }
     }
 
     function switchPromptActor(actor) {
       promptState.currentActor = actor;
-      document.getElementById('btnSimSarah').classList.toggle('active', actor === 'sarah');
-      document.getElementById('btnSimOmar').classList.toggle('active', actor === 'omar');
+      const b1 = document.getElementById('btnSimSarah');
+      const b2 = document.getElementById('btnSimOmar');
+      if (b1) b1.classList.toggle('active', actor === 'p1');
+      if (b2) b2.classList.toggle('active', actor === 'p2');
       renderPromptWidget();
     }
 
-    function submitOmarAnswer() {
-      const input = document.getElementById('omarInputText');
-      if (input && input.value.trim()) {
-        promptState.omarAnswer = input.value.trim();
+    function submitP1Answer() {
+      const input = document.getElementById('p1InputText');
+      if (!input || !input.value.trim()) {
+        showToast('⚠️ يرجى كتابة إجابتك أولاً');
+        return;
       }
-      promptState.isRevealed = true;
-      promptState.streakDays = 43;
-      document.getElementById('streakDaysCount').innerText = '43';
-      document.getElementById('flamePill').style.background = 'linear-gradient(135deg, #FF6D00, #FFD600)';
+      playPop();
+      promptState.p1Answer = input.value.trim();
+      if (promptState.p2Answer) {
+        promptState.isRevealed = true;
+        promptState.streakDays = 2;
+        document.getElementById('streakDaysCount').innerText = '2';
+        playChime();
+        showToast('🎉 رائع! تم كشف الزاويتين معاً بنجاح!');
+      } else {
+        showToast('🔒 تم حفظ إجابتك مشفرة! بانتظار إجابة الشريك 2.');
+      }
       renderPromptWidget();
-      showToast('🎉 رائع! تم كشف الزاويتين معاً وزادت شعلة الثنائي إلى 43 يوماً متواصلاً!');
+    }
+
+    function submitP2Answer() {
+      const input = document.getElementById('p2InputText');
+      if (!input || !input.value.trim()) {
+        showToast('⚠️ يرجى كتابة إجابتك أولاً');
+        return;
+      }
+      playPop();
+      promptState.p2Answer = input.value.trim();
+      if (promptState.p1Answer) {
+        promptState.isRevealed = true;
+        promptState.streakDays = 2;
+        document.getElementById('streakDaysCount').innerText = '2';
+        playChime();
+        showToast('🎉 رائع! اكتملت الزاويتان وتم كشفهما معاً بنجاح!');
+      } else {
+        showToast('🔒 تم حفظ إجابتك مشفرة! بانتظار إجابة الشريك 1.');
+      }
+      renderPromptWidget();
     }
 
     // Initial render
@@ -2734,35 +2927,140 @@
       inner.classList.toggle('flipped');
     }
 
-    // 2x2 Chat Controls
-    let currentVoice = 'سارة (صوت فردي)';
+    // 2x2 Chat Controls & Safe Modal Handlers
+    let currentVoice = 'الشريك 1 (صوت فردي)';
+
+    function handleChatBackdropClick(e) {
+      if (e.target && e.target.id === 'chatModal') {
+        closeChatDirect();
+      }
+    }
+
     function openChatModal() {
-      document.getElementById('chatModal').style.display = 'flex';
+      playPop();
+      const modal = document.getElementById('chatModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        const container = document.getElementById('chatMessages');
+        if (container) container.scrollTop = container.scrollHeight;
+        setTimeout(() => {
+          const input = document.getElementById('chatInput');
+          if (input) input.focus();
+        }, 150);
+      }
     }
+
     function closeChatDirect() {
-      document.getElementById('chatModal').style.display = 'none';
+      playPop();
+      const modal = document.getElementById('chatModal');
+      if (modal) modal.style.display = 'none';
     }
+
     function closeChatModal(e) {
-      closeChatDirect();
+      handleChatBackdropClick(e);
     }
+
     function setVoice(btn, voice) {
-      document.querySelectorAll('.voice-btn').forEach(b => b.classList.remove('active'));
+      playPop();
+      document.querySelectorAll('.voice-selector-bar .voice-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentVoice = voice;
       showToast(`التحدث الآن بصوت: ${voice}`);
     }
+
     function sendChatMessage() {
       const input = document.getElementById('chatInput');
+      if (!input) return;
       const text = input.value.trim();
-      if (!text) return;
+      if (!text) {
+        showToast('⚠️ يرجى كتابة رسالة أولاً');
+        return;
+      }
+      playPop();
       const container = document.getElementById('chatMessages');
       const newMsg = document.createElement('div');
       newMsg.className = 'chat-msg mine';
-      newMsg.innerHTML = `<div style="font-size: 10px; font-weight: 700; color: #E8F4F3; margin-bottom: 2px;">${currentVoice}:</div>${text}`;
+      const safeText = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      newMsg.innerHTML = `<div style="font-size: 10px; font-weight: 700; color: #E8F4F3; margin-bottom: 2px;">${currentVoice}:</div><div>${safeText}</div><div style="font-size: 9px; opacity: 0.7; text-align: left; margin-top: 3px;">الآن ✓</div>`;
       container.appendChild(newMsg);
       input.value = '';
       container.scrollTop = container.scrollHeight;
-      showToast('تم إرسال الرسالة إلى الثنائي!');
+      showToast('تم إرسال الرسالة بنجاح!');
+
+      // Realistic partner duo acknowledgment
+      setTimeout(() => {
+        playChime();
+        const replyMsg = document.createElement('div');
+        replyMsg.className = 'chat-msg theirs';
+        replyMsg.innerHTML = `<div style="font-size: 10px; font-weight: 700; color: var(--color-primary); margin-bottom: 2px;">الثنائي المتابع (@connected_duo):</div><div>مرحباً بكما! رسالتكما المشتركة وصلت بنجاح، ويسعدنا التواصل والتنسيق معكما 👥🎨</div><div style="font-size: 9px; opacity: 0.6; text-align: left; margin-top: 3px;">الآن ✓</div>`;
+        container.appendChild(replyMsg);
+        container.scrollTop = container.scrollHeight;
+        showToast('💬 رد جديد في محادثة 2x2');
+      }, 1500);
+    }
+
+    // PWA Mobile Download Modal Controls
+    function handleInstallBackdropClick(e) {
+      if (e.target && e.target.id === 'installModal') {
+        closeInstallModal();
+      }
+    }
+
+    function openInstallModal() {
+      playPop();
+      const modal = document.getElementById('installModal');
+      if (modal) modal.style.display = 'flex';
+      const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isIos) {
+        switchInstallTab('ios');
+      } else {
+        switchInstallTab('android');
+      }
+    }
+
+    function closeInstallModal() {
+      playPop();
+      const modal = document.getElementById('installModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function switchInstallTab(tab) {
+      playPop();
+      const tabIos = document.getElementById('tabBtnIos');
+      const tabAndroid = document.getElementById('tabBtnAndroid');
+      const guideIos = document.getElementById('installIosGuide');
+      const guideAndroid = document.getElementById('installAndroidGuide');
+      const btnDirect = document.getElementById('btnTriggerDirectInstall');
+
+      if (tab === 'ios') {
+        tabIos?.classList.add('active');
+        tabAndroid?.classList.remove('active');
+        if (guideIos) guideIos.style.display = 'flex';
+        if (guideAndroid) guideAndroid.style.display = 'none';
+        if (btnDirect) btnDirect.innerText = '🍎 اتبع خطوات Safari أعلاه للتثبيت';
+      } else {
+        tabAndroid?.classList.add('active');
+        tabIos?.classList.remove('active');
+        if (guideAndroid) guideAndroid.style.display = 'flex';
+        if (guideIos) guideIos.style.display = 'none';
+        if (btnDirect) btnDirect.innerText = '📲 تثبيت التطبيق الآن على جهازك';
+      }
+    }
+
+    function executeDirectPWAInstall() {
+      playPop();
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('🎉 شكراً لتثبيت تطبيق MYHALF على جهازك!');
+            closeInstallModal();
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        showToast('💡 اتبع الإرشادات الظاهرة أعلاه لإضافة التطبيق إلى شاشتك الرئيسية');
+      }
     }
 
     // VIP Share Modal Controls
@@ -3028,10 +3326,11 @@
     // ==========================================
     async function shareCardDirect() {
       playChime();
+      const duo = window.currentDuo || { handle: '@our_duo', displayName: 'حساب الثنائي' };
       const shareData = {
-        title: 'بطاقة الثنائي الرسمية — سارة وعمر على MYHALF',
-        text: 'تابعوا رحلتنا وإبداعاتنا المشتركة على شبكة MYHALF (شخصان. حساب واحد. ملكية متساوية):',
-        url: 'https://myhalf.online/@sara_and_omar'
+        title: 'بطاقة الثنائي الرسمية — ' + duo.displayName + ' على MYHALF',
+        text: 'تابعوا رحلتنا وإبداعاتنا المشتركة على شبكة MYHALF (شخصان. حساب واحد. ملكية متساوية 50/50):',
+        url: 'https://myhalf.online/' + (duo.handle || '@our_duo')
       };
       if (navigator.share) {
         try {
@@ -3185,7 +3484,7 @@
       showToast('النشر الآن: ' + voice);
     }
 
-    // Publish Custom Post directly into feed
+    // Dynamic Live Post Publishing
     function publishCustomPost() {
       const text = document.getElementById('composerText').value.trim();
       if (!text) {
@@ -3193,13 +3492,97 @@
         return;
       }
       playChime();
-      showToast('✨ تم نشر المنشور بنجاح في خلاصة الثنائي!');
+      const container = document.getElementById('dynamicPostsContainer');
+      const emptyCard = document.getElementById('emptyFeedCard');
+      if (emptyCard) emptyCard.style.display = 'none';
+
+      const postCard = document.createElement('div');
+      postCard.className = 'card';
+      postCard.style.marginBottom = '20px';
+      const safeText = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      postCard.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="duo-avatar-box overlap">
+              <img src="/icon.svg" class="avatar-img" style="width:42px;height:42px;border-radius:50%;" alt="P1">
+              <img src="/logo.png" class="avatar-img" style="width:42px;height:42px;border-radius:50%;background:var(--bg-surface);object-fit:contain;margin-inline-start:-14px;" alt="P2">
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 14px;">${duo.displayName} (${duo.handle})</div>
+              <div style="font-size: 11px; color: var(--text-secondary);">منشور موثق جديد • الآن ✓</div>
+            </div>
+          </div>
+          <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 2px 8px; border-radius: 4px; font-weight: 700;">منشور مشترك</span>
+        </div>
+        <div style="font-size: 15px; line-height: 1.6; margin-bottom: 14px; color: var(--text-primary);">
+          ${safeText}
+        </div>
+        <div class="post-actions-bar" style="border-top: 1px solid var(--border-subtle); padding-top: 10px;">
+          <div style="display: flex; gap: 14px;">
+            <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="likePost(this)">
+              <span class="nav-icon">❤️</span> <span class="like-count">1</span>
+            </button>
+            <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="openChatModal()">
+              <span class="nav-icon">💬</span> <span>محادثة</span>
+            </button>
+          </div>
+        </div>`;
+      
+      if (container) container.prepend(postCard);
       document.getElementById('composerText').value = '';
+      showToast('✨ تم نشر المنشور بنجاح في خلاصة الثنائي!');
       switchScreen('screen-feed');
     }
 
     function publishSplitPostDirect() {
       playChime();
+      const p1Text = document.getElementById('tpPartner1Text')?.value.trim() || 'روايتي الخاصة للحدث بعدستي المستقلة';
+      const p2Text = document.getElementById('tpPartner2Text')?.value.trim() || 'روايتي الموازية وتفاصيل المشهد من زاويتي';
+      const title = document.getElementById('tpPostTitle')?.value.trim() || 'ذكرى مشتركة جديدة برؤيتين';
+      const duo = window.currentDuo || { displayName: 'حساب الثنائي', handle: '@our_duo' };
+
+      const container = document.getElementById('dynamicPostsContainer');
+      const emptyCard = document.getElementById('emptyFeedCard');
+      if (emptyCard) emptyCard.style.display = 'none';
+
+      const postCard = document.createElement('div');
+      postCard.className = 'perspectives-card';
+      postCard.style.marginBottom = '20px';
+      postCard.innerHTML = `
+        <div class="perspectives-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="duo-avatar-box overlap">
+              <img src="/icon.svg" class="avatar-img" style="width:42px;height:42px;border-radius:50%;" alt="P1">
+              <img src="/logo.png" class="avatar-img" style="width:42px;height:42px;border-radius:50%;background:var(--bg-surface);object-fit:contain;margin-inline-start:-14px;" alt="P2">
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 14px;">حسابكما الثنائي</div>
+              <div style="font-size: 11px; color: var(--color-primary); font-weight: 700;">منشور الزاويتين المعتمد • الآن ✓</div>
+            </div>
+          </div>
+          <span class="preview-tag">توقيع مزدوج 50/50</span>
+        </div>
+        <div style="padding: 12px 18px 6px;">
+          <h4 style="font-size: 15px; font-weight: 800;">${title}</h4>
+        </div>
+        <div style="padding: 0 16px 16px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="background: var(--color-primary-light); padding: 12px; border-radius: var(--radius-md); font-size: 13px;">
+            <strong>الزاوية الأولى:</strong> "${p1Text}"
+          </div>
+          <div style="background: var(--color-secondary-light); padding: 12px; border-radius: var(--radius-md); font-size: 13px;">
+            <strong>الزاوية الثانية:</strong> "${p2Text}"
+          </div>
+        </div>
+        <div class="post-actions-bar">
+          <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="likePost(this)">
+            <span class="nav-icon">❤️</span> <span class="like-count">1</span>
+          </button>
+          <button class="nav-item" style="flex-direction: row; gap: 6px;" onclick="openChatModal()">
+            <span class="nav-icon">💬</span> <span>محادثة الثنائيات</span>
+          </button>
+        </div>`;
+
+      if (container) container.prepend(postCard);
       showToast('✨ تم اعتماد ونشر منشور الزاويتين بنجاح في خلاصة الثنائي!');
       switchScreen('screen-feed');
     }
@@ -3228,21 +3611,28 @@
       }
     }
 
-    // Search filter
+    // Dynamic Search Filter
     function handleSearchFilter(query) {
       const res = document.getElementById('searchResults');
-      if (!query.trim()) {
-        res.innerHTML = 'اكتب اسم ثنائي أو اهتمام مشترك لعرض النتائج المباشرة.';
+      if (!res) return;
+      const q = (query || '').trim().toLowerCase();
+      if (!q) {
+        res.innerHTML = 'اكتب اسم ثنائي، المعرف @handle، أو اهتمام مشترك لعرض النتائج المباشرة.';
         return;
       }
-      res.innerHTML = '<div style="text-align: right; display: flex; flex-direction: column; gap: 8px;">' +
-        '<div style="background: var(--bg-surface); padding: 10px; border-radius: 8px; border: 1px solid var(--border-subtle);">' +
-        '<strong>سارة وعمر (@sara_and_omar)</strong> — 43 يوماً تفاعل • ثنائي إبداعي' +
-        '</div>' +
-        '<div style="background: var(--bg-surface); padding: 10px; border-radius: 8px; border: 1px solid var(--border-subtle);">' +
-        '<strong>كريم ويوسف (@tech_duo)</strong> — مؤسسان تقنيان • تطبيق MYHALF' +
-        '</div>' +
-        '</div>';
+      const duo = window.currentDuo || { displayName: 'حساب الثنائي', handle: '@our_duo' };
+      if (duo.displayName.toLowerCase().includes(q) || duo.handle.toLowerCase().includes(q)) {
+        res.innerHTML = '<div style="text-align: right; display: flex; flex-direction: column; gap: 8px;">' +
+          '<div style="background: var(--bg-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--color-primary); display: flex; align-items: center; justify-content: space-between;">' +
+          '<div><strong>' + duo.displayName + ' (' + duo.handle + ')</strong><div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">' + (duo.bio || 'حساب ثنائي موثق') + '</div></div>' +
+          '<button class="btn btn-outline" style="font-size: 11px; padding: 4px 10px;" onclick="switchScreen(\'screen-profile\')">زيارة الملف</button>' +
+          '</div></div>';
+      } else {
+        res.innerHTML = '<div style="padding: 24px; text-align: center; color: var(--text-secondary);">' +
+          '<div style="font-size: 32px; margin-bottom: 6px;">🔍</div>' +
+          '<div>لا توجد ثنائيات مطابقة لـ "<strong>' + query.replace(/</g, '&lt;') + '</strong>" حالياً.</div>' +
+          '<div style="font-size: 11px; margin-top: 6px;">كن أول من يوثق حضوره ويدعو شريكه!</div></div>';
+      }
     }
 
     // Proposal Actions
@@ -3292,10 +3682,30 @@
     }
 
     function saveIdentityAndEnter() {
+      const handleVal = document.getElementById('setupHandle')?.value.trim() || 'our_duo';
+      const nameVal = document.getElementById('setupDisplayName')?.value.trim() || 'حساب الثنائي';
+      const bioVal = document.getElementById('setupBio')?.value.trim() || 'شخصان، حساب واحد، ملكية متساوية 50/50.';
+      const archVal = document.getElementById('setupArchetype')?.value || 'couples';
+
+      window.currentDuo = {
+        handle: handleVal.startsWith('@') ? handleVal : '@' + handleVal,
+        displayName: nameVal,
+        bio: bioVal,
+        archetype: archVal
+      };
+      try {
+        localStorage.setItem('myhalf_current_duo', JSON.stringify(window.currentDuo));
+      } catch (e) {}
+      applyCurrentDuoToUI();
       playChime();
-      showToast('🚀 تم تفعيل الحساب المشترك رسمياً! أهلاً بكما في MYHALF.');
+      showToast('🚀 تم تفعيل الحساب المشترك بنجاح! أهلاً بكما في MYHALF.');
       switchScreen('screen-feed');
     }
+
+    // On page load, apply active duo
+    window.addEventListener('DOMContentLoaded', () => {
+      applyCurrentDuoToUI();
+    });
   </script>
 </body>
 </html>

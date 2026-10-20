@@ -5,6 +5,7 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/manifest.webmanifest',
   '/icon.svg',
+  '/logo.png',
   '/api/health'
 ];
 
