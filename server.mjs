@@ -89,23 +89,34 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Static files or main SPA
+  // Static files in public/ (served either as /public/... or directly at root like /logo.png)
+  const mimeTypes = {
+    '.html': 'text/html; charset=utf-8',
+    '.css': 'text/css; charset=utf-8',
+    '.js': 'text/javascript; charset=utf-8',
+    '.mjs': 'text/javascript; charset=utf-8',
+    '.json': 'application/json',
+    '.webmanifest': 'application/manifest+json',
+    '.svg': 'image/svg+xml',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.webp': 'image/webp',
+    '.ico': 'image/x-icon'
+  };
+
+  let potentialPublicPath = null;
   if (url.pathname.startsWith('/public/')) {
-    const filePath = path.join(__dirname, url.pathname);
-    if (fs.existsSync(filePath)) {
-      const ext = path.extname(filePath);
-      const mimeTypes = {
-        '.html': 'text/html',
-        '.css': 'text/css',
-        '.js': 'text/javascript',
-        '.json': 'application/json',
-        '.svg': 'image/svg+xml',
-        '.png': 'image/png'
-      };
-      res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'text/plain' });
-      fs.createReadStream(filePath).pipe(res);
-      return;
-    }
+    potentialPublicPath = path.join(__dirname, url.pathname);
+  } else if (url.pathname !== '/' && !url.pathname.startsWith('/api/')) {
+    potentialPublicPath = path.join(__dirname, 'public', url.pathname);
+  }
+
+  if (potentialPublicPath && fs.existsSync(potentialPublicPath) && fs.statSync(potentialPublicPath).isFile()) {
+    const ext = path.extname(potentialPublicPath).toLowerCase();
+    res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
+    fs.createReadStream(potentialPublicPath).pipe(res);
+    return;
   }
 
   // Fallback to SPA

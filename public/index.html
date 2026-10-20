@@ -2,14 +2,14 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>MYHALF — شخصان. حساب واحد. ملكية متساوية | Two People. One Account.</title>
   <meta name="description" content="الشبكة الاجتماعية الأولى عالمياً المخصصة حصرياً للحسابات الثنائية المشتركة بملكية متساوية، وجهتا نظر، وحوكمة مزدوجة.">
   <link rel="canonical" href="https://myhalf.online">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
   <link rel="apple-touch-icon" href="/icon.svg">
-  <meta name="theme-color" content="#247B78">
+  <meta name="theme-color" content="#076867">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="MYHALF">
@@ -25,14 +25,13 @@
   <meta name="twitter:title" content="MYHALF — Two People. One Account. Equal Ownership.">
   <meta name="twitter:description" content="The world's first duo-only social network.">
   <meta name="twitter:image" content="https://myhalf.online/icon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Standard Ubiquitous Native Arabic System Font Stack -->
   <style>
     :root {
-      --color-primary: #247B78;
-      --color-primary-hover: #1D6360;
-      --color-primary-light: #E8F4F3;
+      --color-primary: #076867;
+      --color-primary-dark: #043E3E;
+      --color-primary-hover: #055251;
+      --color-primary-light: #E7F3F2;
       --color-secondary: #D17B59;
       --color-secondary-hover: #B86544;
       --color-secondary-light: #FAECE6;
@@ -51,7 +50,7 @@
       --shadow-sm: 0 1px 3px rgba(24, 34, 37, 0.05);
       --shadow-md: 0 4px 16px rgba(24, 34, 37, 0.08);
       --shadow-lg: 0 12px 32px rgba(24, 34, 37, 0.12);
-      --font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", Tahoma, "Helvetica Neue", Arial, sans-serif;
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -68,9 +67,9 @@
       --text-secondary: #A2ADB0;
       --text-tertiary: #6E7B7E;
       --text-inverse: #12181A;
-      --color-primary: #2F9B97;
+      --color-primary: #129E9B;
       --color-secondary: #DE8866;
-      --color-primary-light: #182B2A;
+      --color-primary-light: #0B2524;
       --color-secondary-light: #2D221D;
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
       --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -145,8 +144,8 @@
       justify-content: space-between;
       align-items: center;
       position: sticky;
-      top: 48px;
-      z-index: 90;
+      top: 0;
+      z-index: 100;
       backdrop-filter: blur(10px);
     }
 
@@ -876,20 +875,532 @@
       from { transform: translate(-50%, 20px); opacity: 0; }
       to { transform: translate(-50%, 0); opacity: 1; }
     }
+
+    /* Official Logo Styles */
+    .official-logo-img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .official-logo-img:hover {
+      transform: scale(1.02);
+    }
+    [data-theme="dark"] .official-logo-img {
+      filter: brightness(0) invert(1);
+    }
+
+    .btn-header-app {
+      background: var(--color-primary);
+      color: white;
+      border: 1px solid var(--color-primary);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      box-shadow: 0 2px 6px rgba(7, 104, 103, 0.2);
+    }
+    .btn-header-app:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    body.landing-mode .bottom-nav {
+      display: none !important;
+    }
+    body.landing-mode main.app-viewport {
+      max-width: 960px;
+      padding-top: 10px;
+    }
+
+    /* Professional Minimalist Landing Page */
+    .landing-page-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px 0 60px;
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .landing-hero {
+      text-align: center;
+      padding: 30px 12px 40px;
+    }
+    
+    .landing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      border: 1px solid rgba(7, 104, 103, 0.15);
+    }
+    
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      animation: pulseFlame 2s infinite ease-in-out;
+    }
+    
+    .hero-brand-center {
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .hero-brand-logo {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+    [data-theme="dark"] .hero-brand-logo {
+      filter: brightness(0) invert(1);
+    }
+    
+    .hero-main-title {
+      font-size: clamp(26px, 5.2vw, 42px);
+      font-weight: 800;
+      line-height: 1.28;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    
+    .highlight-text {
+      color: var(--color-primary);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(14px, 2vw, 17px);
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0 auto 28px;
+      font-weight: 400;
+    }
+    
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    
+    .btn-hero-primary {
+      padding: 13px 26px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 14px rgba(7, 104, 103, 0.3);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-hero-primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(7, 104, 103, 0.4);
+    }
+    
+    .btn-hero-secondary {
+      padding: 13px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-hero-secondary:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+    
+    /* Live Tactile Demo Card */
+    .landing-preview-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-md);
+      max-width: 660px;
+      margin: 0 auto;
+      text-align: right;
+    }
+    
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .preview-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border: 1px solid rgba(7, 104, 103, 0.2);
+    }
+    
+    .preview-footer {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      background: var(--bg-elevated);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+    }
+    
+    /* Landing Sections */
+    .landing-section {
+      padding: 48px 12px;
+    }
+    .landing-section.bg-subtle {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      margin: 20px 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: clamp(20px, 3.8vw, 30px);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* 4 Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .pillar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px 18px;
+      transition: all 0.2s ease;
+      text-align: right;
+    }
+    .pillar-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary);
+    }
+    .pillar-icon-box {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .pillar-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .pillar-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Target Duos Grid */
+    .duo-types-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .duo-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      text-align: center;
+    }
+    .duo-card-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .duo-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .duo-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Transparency Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      text-align: center;
+    }
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 12px;
+    }
+    .stat-number {
+      font-size: clamp(22px, 3.6vw, 32px);
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    
+    /* CTA Banner */
+    .landing-cta-banner {
+      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 40px 20px;
+      text-align: center;
+      margin: 36px 0;
+      box-shadow: var(--shadow-lg);
+    }
+    .landing-cta-banner h2 {
+      font-size: clamp(20px, 3.8vw, 30px);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .landing-cta-banner p {
+      font-size: 14px;
+      opacity: 0.9;
+      max-width: 500px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+    .landing-cta-banner .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    /* Minimalist Footer */
+    .landing-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 36px 12px 20px;
+      margin-top: 36px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .footer-brand p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover {
+      color: var(--color-primary);
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* Mobile-First Responsiveness */
+    @media (max-width: 640px) {
+      .screen-selector-bar {
+        padding: 6px 10px;
+      }
+      header.main-header {
+        padding: 8px 12px;
+      }
+      .official-logo-img {
+        height: 26px;
+      }
+      .brand-text h1 {
+        font-size: 16px;
+      }
+      .brand-text span.tagline {
+        display: none;
+      }
+      .header-controls {
+        gap: 4px;
+      }
+      .header-controls .icon-btn {
+        padding: 6px 8px;
+        font-size: 13px;
+      }
+      .header-controls .hide-on-mobile {
+        display: none !important;
+      }
+      .lang-select {
+        padding: 4px 6px;
+        font-size: 11px;
+        max-width: 74px;
+      }
+      .btn-header-app {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+      main.app-viewport {
+        padding: 10px 10px calc(80px + env(safe-area-inset-bottom, 0px));
+      }
+      body.landing-mode main.app-viewport {
+        padding: 0 10px 40px;
+      }
+      .card {
+        padding: 14px;
+        border-radius: var(--radius-md);
+      }
+      .split-slider-container {
+        height: 230px !important;
+      }
+      .split-handle {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+      }
+      .split-tag {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+      .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-cta-group .btn-hero-primary,
+      .hero-cta-group .btn-hero-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .duo-types-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .stat-card {
+        padding: 14px 8px;
+      }
+      .landing-cta-banner {
+        padding: 32px 16px;
+      }
+      .landing-cta-banner .cta-actions {
+        flex-direction: column;
+      }
+      .landing-cta-banner .cta-actions button {
+        width: 100%;
+      }
+      .footer-top {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .header-controls .lang-select {
+        display: none;
+      }
+      .hero-main-title {
+        font-size: 24px;
+      }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
+<body class="landing-mode">
 
   <!-- Screen Quick Switcher -->
   <div class="screen-selector-bar" id="screenBar" style="display: none;">
     <span style="font-size: 12px; font-weight: 700; color: var(--text-tertiary);" id="txtScreenSelect">الشاشات:</span>
-    <button class="screen-pill" onclick="switchScreen('screen-welcome')">01. الترحيب</button>
+    <button class="screen-pill active" onclick="switchScreen('screen-welcome')">01. صفحة الهبوط</button>
     <button class="screen-pill" onclick="switchScreen('screen-auth')">02. التسجيل المنفصل</button>
     <button class="screen-pill" onclick="switchScreen('screen-invite')">03. دعوة الشريك</button>
     <button class="screen-pill" onclick="switchScreen('screen-accept')">04. قبول الميثاق</button>
     <button class="screen-pill" onclick="switchScreen('screen-identity')">05. هوية الثنائي</button>
-    <button class="screen-pill active" onclick="switchScreen('screen-feed')">06. الخلاصة وسؤال اليوم</button>
+    <button class="screen-pill" onclick="switchScreen('screen-feed')">06. الخلاصة وسؤال اليوم</button>
     <button class="screen-pill" onclick="switchScreen('screen-profile')">07. الملف والذكريات</button>
     <button class="screen-pill" onclick="switchScreen('screen-create-post')">08. نشر منشور عادي</button>
     <button class="screen-pill" onclick="switchScreen('screen-create-tp')">09. محرر زاويتان</button>
@@ -904,25 +1415,24 @@
 
   <!-- Header -->
   <header class="main-header">
-    <a href="#" class="brand-logo" onclick="switchScreen('screen-feed'); return false;">
-      <div class="brand-mark">½</div>
-      <div class="brand-text">
-        <h1>MYHALF <span style="font-size: 11px; padding: 2px 6px; border-radius: 4px; background: var(--color-primary-light); color: var(--color-primary);">INTERNATIONAL</span></h1>
-        <span class="tagline" id="txtTagline">شخصان. حساب واحد. ملكية متساوية.</span>
-      </div>
+    <a href="#" class="brand-logo" onclick="switchScreen('screen-welcome'); return false;" title="MYHALF — الصفحة الرئيسية">
+      <img src="/logo.png" alt="myhalf" class="official-logo-img">
     </a>
     <div class="header-controls">
-      <button class="icon-btn" onclick="openShareModal()" title="توليد بطاقة المشاركة الفاخرة">
+      <button class="btn-header-app" id="btnNavToggle" onclick="toggleAppMode()" title="الانتقال إلى واجهة التطبيق التفاعلية">
+        <span>🚀</span> <span class="btn-text">دخول التطبيق</span>
+      </button>
+      <button class="icon-btn hide-on-mobile" onclick="openShareModal()" title="توليد بطاقة المشاركة الفاخرة">
         <span>🪪</span> <span style="font-size: 11px;">بطاقة الثنائي</span>
       </button>
       <button class="icon-btn" onclick="switchScreen('screen-notifications')" title="الإشعارات والموافقات">
         <span>🔔</span> <span class="badge" style="background: var(--status-danger); color: white; border-radius: 50%; font-size: 10px; padding: 1px 5px; margin-inline-start: -4px;">2</span>
       </button>
-      <button class="icon-btn" onclick="openChatModal()" title="الدردشة المشتركة 2x2">
+      <button class="icon-btn hide-on-mobile" onclick="openChatModal()" title="الدردشة المشتركة 2x2">
         <span>💬</span> <span style="font-size: 11px;">الدردشة</span>
       </button>
-      <button class="icon-btn" onclick="toggleSound()" title="تبديل المؤثرات الصوتية التفاعلية" id="btnSound">🔊</button>
-      <button class="icon-btn" onclick="installPWA()" title="تثبيت التطبيق على جهازك" id="btnInstallApp" style="display:none; color: var(--color-primary); font-weight:700;">
+      <button class="icon-btn hide-on-mobile" onclick="toggleSound()" title="تبديل المؤثرات الصوتية التفاعلية" id="btnSound">🔊</button>
+      <button class="icon-btn hide-on-mobile" onclick="installPWA()" title="تثبيت التطبيق على جهازك" id="btnInstallApp" style="display:none; color: var(--color-primary); font-weight:700;">
         <span>📲</span> <span style="font-size: 11px;">تثبيت</span>
       </button>
       <select class="lang-select" id="langSelect" onchange="changeLocale(this.value)">
@@ -938,7 +1448,7 @@
   <main class="app-viewport">
 
     <!-- Screen 06: Home Feed with Daily Prompt & Split Slider -->
-    <div id="screen-feed" class="screen-view active">
+    <div id="screen-feed" class="screen-view">
       
       <!-- Interactive Stories Bar -->
       <div class="stories-container">
@@ -1168,10 +1678,204 @@
     </div>
 
     <!-- Remaining Screens -->
-    <div id="screen-welcome" class="screen-view">
-      <div class="card" style="text-align: center; padding: 36px 20px;">
-        <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 12px;">أول شبكة اجتماعية عالمية للحسابات المشتركة</h2>
-        <button class="btn btn-primary" onclick="switchScreen('screen-auth')">ابدأ حساب ثنائي جديد</button>
+    <!-- Screen 01: Professional Minimalist Landing Page -->
+    <div id="screen-welcome" class="screen-view active">
+      <div class="landing-page-wrapper">
+        
+        <!-- Hero Section -->
+        <section class="landing-hero">
+          <div class="landing-badge">
+            <span class="badge-dot"></span>
+            <span>الشبكة الاجتماعية الأولى عالمياً للحسابات الثنائية المشتركة</span>
+          </div>
+          
+          <div class="hero-brand-center">
+            <img src="/logo.png" alt="myhalf" class="hero-brand-logo">
+          </div>
+
+          <h1 class="hero-main-title">
+            شخصان. حساب واحد.<br>
+            <span class="highlight-text">ملكية متساوية 50/50.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            المنصة العالمية الوحيدة المصممة حصرياً للشراكة الحقيقية — للأزواج، توائم الروح، وشركاء المشاريع.
+            لا طرف يملك أكثر من الآخر، ولا منشور يُنشر، ولا قرار يُتخذ، إلا بموافقة الاثنين معاً.
+          </p>
+
+          <div class="hero-cta-group">
+            <button class="btn btn-hero-primary" onclick="switchScreen('screen-auth')">
+              <span>✨ ابدأ حسابك الثنائي مجاناً</span>
+            </button>
+            <button class="btn btn-hero-secondary" onclick="switchScreen('screen-feed')">
+              <span>🚀 جرّب واجهة التطبيق الحية</span>
+            </button>
+          </div>
+
+          <!-- Live Interactive Tactile Demo Card right in the Hero -->
+          <div class="landing-preview-card">
+            <div class="preview-header">
+              <div class="duo-avatar-box overlap">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" class="avatar-img" alt="P1">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" class="avatar-img" alt="P2">
+              </div>
+              <div style="flex: 1; margin-inline-start: 10px;">
+                <div style="font-weight: 800; font-size: 15px;">سارة وعمر (@sara_and_omar)</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">معاينة حية تفاعلية • اسحب المقبض في الوسط ⇔</div>
+              </div>
+              <span class="preview-tag">منشور الزاويتين</span>
+            </div>
+
+            <!-- The Interactive Split Slider -->
+            <div class="split-slider-container" onmousemove="handleSliderMove(event, this)" ontouchmove="handleSliderTouch(event, this)">
+              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1000&h=600&fit=crop" class="split-img" alt="عمر">
+              <span class="split-tag p2">عدسة عمر (لحظة الهدوء)</span>
+
+              <div class="split-overlay" style="width: 50%;">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1000&h=600&fit=crop" class="split-img" alt="سارة">
+              </div>
+              <span class="split-tag p1">عدسة سارة (شروق الأطلسي)</span>
+
+              <div class="split-handle" style="left: 50%;">⇔</div>
+            </div>
+
+            <div class="preview-footer">
+              💡 <strong>تجربة الزاويتين الحية:</strong> نفس اللحظة ونفس المشهد، يرويها الشريكان بعدستين وصوتين متوازيين في منشور واحد موحد.
+            </div>
+          </div>
+        </section>
+
+        <!-- The 4 Minimalist Innovation Pillars -->
+        <section class="landing-section">
+          <div class="section-header">
+            <span class="section-eyebrow">مفهوم المناصفة</span>
+            <h2 class="section-title">أربع ركائز لإعادة تعريف التواصل الإنساني</h2>
+            <p class="section-desc">صممنا كل تفصيلة في MYHALF لتخدم مبدأ واحداً أصيلاً: لا تبعية في الحب ولا استئثار في الشراكة.</p>
+          </div>
+
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <div class="pillar-icon-box">⚖️</div>
+              <h3 class="pillar-title">المناصفة الرقمية المطلقة</h3>
+              <p class="pillar-desc">
+                لا يوجد مدير ومتابع. الحساب ملك لكما بالتساوي (50% - 50%). لا يمكن حذف الحساب أو تغيير المعرف أو نشر المحتوى الحساس إلا بموافقة التوقيع المزدوج.
+              </p>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon-box">🌅</div>
+              <h3 class="pillar-title">منشور الزاويتين التفاعلي</h3>
+              <p class="pillar-desc">
+                كل قصة لها وجهتا نظر. يتيح المنشور التفاعلي للمتابعين سحب الشاشة لرؤية اللحظة كما عاشها كل منكما بعدسته الخاصة وروايته المكتوبة.
+              </p>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon-box">🔒</div>
+              <h3 class="pillar-title">سؤال اليوم بحجاب الخصوصية</h3>
+              <p class="pillar-desc">
+                سؤال يومي ذكي يُعزز الصدق والقرب. حجاب الخصوصية يمنع كلاً منكما من قراءة إجابة الآخر حتى يجيب كلاهما، فتُكشف الإجابتان معاً في نفس اللحظة!
+              </p>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon-box">🕊️</div>
+              <h3 class="pillar-title">حلول إنسانية وحماية استثنائية</h3>
+              <p class="pillar-desc">
+                الحياة تتغير، وتطبيقنا مستعد: حماية فورية من الانتقام الرقمي عند الخلاف، توثيق الانفصال الودي واقتسام الأرشيف الرقمي بعدالة، وتخليد ذكرى الشريك بكرامة وأمان.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Who is it for? -->
+        <section class="landing-section bg-subtle">
+          <div class="section-header">
+            <span class="section-eyebrow">فضاء مخصص</span>
+            <h2 class="section-title">صُمم لكل ثنائي حقيقي في هذا العالم</h2>
+          </div>
+
+          <div class="duo-types-grid">
+            <div class="duo-card">
+              <div class="duo-card-icon">💍</div>
+              <h3>الأزواج ورفقاء العمر</h3>
+              <p>
+                مساحة عائلية راقية لتوثيق تاريخ الشراكة، الاحتفال بالذكرى السنوية، وبناء أرشيف رقمي نقي ومحمي بعيداً عن ضوضاء المنصات الفردية.
+              </p>
+            </div>
+
+            <div class="duo-card">
+              <div class="duo-card-icon">🤝</div>
+              <h3>الأصدقاء وتوائم الروح</h3>
+              <p>
+                رفقاء الدرب، السفر، المغامرات، وصنّاع الذكريات المشتركة. حساب يمثلكما بصوت واحد متناغم وموثق في مواجهة العالم.
+              </p>
+            </div>
+
+            <div class="duo-card">
+              <div class="duo-card-icon">💼</div>
+              <h3>الشركاء والمؤسسون</h3>
+              <p>
+                المؤسسون الشركاء، ثنائيات البودكاست، والفرق الإبداعية التي تتطلب شفافية تامة وحوكمة مشتركة في إدارة حضورهم الرقمي.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Transparency Stats -->
+        <section class="landing-section">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">50 / 50</div>
+              <div class="stat-label">نسبة الملكية الرقمية القانونية</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">2</div>
+              <div class="stat-label">شريكان اثنان فقط لكل حساب موثق</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">0</div>
+              <div class="stat-label">قرارات انفرادية أو استحواذ تعسفي</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">تشفير وحماية لكبسولة الذكريات</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Final Call to Action Banner -->
+        <section class="landing-cta-banner">
+          <h2>هل أنت وشريكك مستعدان لتجربة مختلفة كلياً؟</h2>
+          <p>ابدآ اليوم في كتابة قصتكما المشتركة على شبكة تفهم معنى الشراكة الحقيقية.</p>
+          <div class="cta-actions">
+            <button class="btn btn-hero-primary" onclick="switchScreen('screen-auth')">
+              <span>ابدأ حسابكما الثنائي الآن — مجاناً</span>
+            </button>
+            <button class="btn btn-hero-secondary" style="background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.4);" onclick="openTermsModal()">
+              <span>📜 مطالعة ميثاق الملكية المشتركة (11 بنداً)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Minimalist Landing Footer -->
+        <footer class="landing-footer">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <img src="/logo.png" alt="myhalf" style="height: 28px; width: auto;">
+              <p>شبكة الحسابات المشتركة بملكية متساوية وحوكمة مزدوجة.</p>
+            </div>
+            <div class="footer-links">
+              <a href="#" onclick="openTermsModal(); return false;">ميثاق الملكية والشروط</a>
+              <a href="#" onclick="switchScreen('screen-safety'); return false;">دليل الأمان وحالات الطوارئ</a>
+              <a href="#" onclick="switchScreen('screen-feed'); return false;">دخول واجهة التطبيق</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div>© 2026 MYHALF. جميع الحقوق محفوظة — مبنية على مبدأ المناصفة المطلقة.</div>
+          </div>
+        </footer>
+
       </div>
     </div>
 
@@ -1992,32 +2696,34 @@
     // Initial render
     renderPromptWidget();
 
-    // Slider Dragging Logic
+    // Generalized Slider Dragging Logic (Supports any split-slider container)
     function handleSliderMove(e, container) {
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      updateSliderPosition(x, rect.width);
+      updateContainerSlider(container, x, rect.width);
     }
     function handleSliderTouch(e, container) {
-      if (e.touches.length > 0) {
+      if (e.touches && e.touches.length > 0) {
         const rect = container.getBoundingClientRect();
         const x = e.touches[0].clientX - rect.left;
-        updateSliderPosition(x, rect.width);
+        updateContainerSlider(container, x, rect.width);
       }
     }
-    function updateSliderPosition(x, width) {
+    function updateContainerSlider(container, x, width) {
       let percent = (x / width) * 100;
       if (percent < 5) percent = 5;
       if (percent > 95) percent = 95;
-      const overlay = document.getElementById('splitOverlay1');
-      const handle = document.getElementById('splitHandle1');
-      const isRtl = document.documentElement.dir === 'rtl';
-      if (isRtl) {
-        overlay.style.width = (100 - percent) + '%';
-        handle.style.left = percent + '%';
-      } else {
-        overlay.style.width = percent + '%';
-        handle.style.left = percent + '%';
+      const overlay = container.querySelector('.split-overlay');
+      const handle = container.querySelector('.split-handle');
+      const isRtl = document.documentElement.dir === 'rtl' || !document.documentElement.dir;
+      if (overlay && handle) {
+        if (isRtl) {
+          overlay.style.width = (100 - percent) + '%';
+          handle.style.left = percent + '%';
+        } else {
+          overlay.style.width = percent + '%';
+          handle.style.left = percent + '%';
+        }
       }
     }
 
@@ -2070,6 +2776,16 @@
       closeShareDirect();
     }
 
+    // App Mode Toggle (Landing Page vs App Feed)
+    function toggleAppMode() {
+      const isWelcome = document.getElementById('screen-welcome')?.classList.contains('active');
+      if (isWelcome) {
+        switchScreen('screen-feed');
+      } else {
+        switchScreen('screen-welcome');
+      }
+    }
+
     // Screen Navigation
     function switchScreen(screenId) {
       playPop();
@@ -2078,6 +2794,15 @@
       if (target) {
         target.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      if (screenId === 'screen-welcome') {
+        document.body.classList.add('landing-mode');
+        const btn = document.getElementById('btnNavToggle');
+        if (btn) btn.innerHTML = '<span>🚀</span> <span class="btn-text">دخول التطبيق</span>';
+      } else {
+        document.body.classList.remove('landing-mode');
+        const btn = document.getElementById('btnNavToggle');
+        if (btn) btn.innerHTML = '<span>🌐</span> <span class="btn-text">صفحة الهبوط</span>';
       }
       document.querySelectorAll('.screen-pill').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('onclick')?.includes(screenId));
