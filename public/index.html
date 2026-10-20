@@ -1204,16 +1204,108 @@
     </div>
 
     <div id="screen-accept" class="screen-view">
-      <div class="card" style="border: 2px solid var(--color-primary);">
-        <h3 style="font-size: 20px; margin-bottom: 8px;">ميثاق الملكية المتساوية</h3>
-        <button class="btn btn-primary btn-full" onclick="switchScreen('screen-identity')">أوافق وأشارك الملكية</button>
+      <div class="card" style="border: 2px solid var(--color-primary); padding: 24px;">
+        
+        <!-- Handshake Header -->
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); font-size: 32px; margin-bottom: 12px;">🤝</div>
+          <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">ميثاق الملكية المتساوية ومصادقة الشراكة</h2>
+          <div style="font-size: 13px; color: var(--text-secondary);">
+            دعوة من <strong style="color: var(--color-primary);">عمر الفاسي (@omar)</strong> لتأسيس الحساب المشترك بالتساوي
+          </div>
+        </div>
+
+        <!-- The Terms Summary Scrollable Box -->
+        <div style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px; max-height: 230px; overflow-y: auto; font-size: 12px; line-height: 1.6; margin-bottom: 16px; border-inline-start: 4px solid var(--color-primary);">
+          <h4 style="font-size: 14px; font-weight: 800; color: var(--color-primary); margin-bottom: 8px;">المبادئ القانونية والتشغيلية الإلزامية لشبكة MYHALF:</h4>
+          
+          <p style="margin-bottom: 10px;">
+            <strong>1. المناصفة التامة (50% / 50% Equity):</strong> كل حساب عام في MYHALF ينتمي لشخصين اثنين فقط بالتساوي. لا يوجد مالك رئيسي ولا تابع، ولكل شريك صوت وتوقيع متكافئ رياضياً.
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>2. حظر الإقصاء الفردي (Anti-Eviction Lock):</strong> لا يستطيع أي طرف منفرداً طرد شريكه أو تجميد وصوله أو الاستيلاء على الحساب والمعرف تحت أي ظرف.
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>3. الحوكمة المزدوجة المتزامنة (Dual Approval):</strong> القرارات الحساسة (تغيير المعرف، النبذة، نقل الملكية، أو إنهاء الحساب) مشروطة بتوقيع الشريكين عبر سجل مشفر (SHA-256).
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>4. الأمان الأحادي وقفل منع الانتقام:</strong> يحق لأي طرف تجميد الحساب فوراً وسرياً لحماية سلامته، وتُقفل الأصول ضد الحذف الانتقامي لمدة 90 يوماً (Digital Escrow).
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>5. مسارات التحول الإنساني:</strong> تُحفظ منشورات الشريك المتوفى تشفيرياً للأبد دون تعديل (🕊️ وضع التخليد)، ويُتاح التصدير المتطابق للبيانات عند الافتراق الودي (📦 كبسولة زمنية).
+          </p>
+          <p>
+            <strong>6. الخصوصية وعدم بيع البيانات:</strong> تلتزم MYHALF بعدم بيع بياناتك أو صورك لأي وسطاء بيانات خارجيين مطلقاً.
+          </p>
+        </div>
+
+        <!-- Read Full Terms Link -->
+        <div style="text-align: center; margin-bottom: 16px;">
+          <button type="button" class="btn btn-outline" style="font-size: 12px; padding: 6px 16px;" onclick="openTermsModal()">
+            📜 قراءة الميثاق الكامل والشروط القانونية (11 بنداً)
+          </button>
+        </div>
+
+        <!-- Checkbox Acceptance -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
+          <input type="checkbox" id="chkAcceptTerms" style="width: 18px; height: 18px; accent-color: var(--color-primary); cursor: pointer; margin-top: 2px;">
+          <label for="chkAcceptTerms" style="font-size: 12px; font-weight: 700; color: var(--text-primary); cursor: pointer; line-height: 1.5;">
+            أقر بأنني قرأت وفهمت ميثاق الملكية المتساوية وشروط الخدمة، وأوافق على مشاركة ملكية الحساب مناصفة مع عمر الفاسي بمسؤولية تضامنية.
+          </label>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" style="flex: 2; padding: 12px;" onclick="confirmCompactAcceptance()">
+            🤝 توقيع الميثاق وتفعيل الحساب المشترك
+          </button>
+          <button class="btn btn-outline" style="flex: 1; padding: 12px; border-color: var(--status-danger); color: var(--status-danger);" onclick="showToast('تم رفض الدعوة'); switchScreen('screen-welcome');">
+            رفض الدعوة
+          </button>
+        </div>
+
       </div>
     </div>
 
     <div id="screen-identity" class="screen-view">
-      <div class="card">
-        <h3 style="font-size: 20px; margin-bottom: 8px;">هوية الثنائي العامة (@handle)</h3>
-        <button class="btn btn-primary btn-full" onclick="switchScreen('screen-feed')">حفظ وتفعيل الحساب</button>
+      <div class="card" style="padding: 24px;">
+        <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+          <span>✨</span> ضبط هوية الثنائي المشتركة
+        </h3>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+          اكتملت المصافحة التشفيرية! حددا الآن كيف سيظهر حسابكما المشترك للعالم.
+        </p>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">معرّف الحساب الفريد (@handle):</label>
+          <input type="text" id="setupHandle" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);" value="sara_and_omar">
+          <div style="font-size: 11px; color: var(--status-success); margin-top: 4px;">✓ المعرف متاح ومستوفٍ لشروط التسمية</div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">الاسم الظاهر للثنائي:</label>
+          <input type="text" id="setupDisplayName" class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);" value="سارة وعمر">
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">تصنيف الشراكة (Archetype):</label>
+          <select class="form-input" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary);">
+            <option value="couples" selected>💑 أزواج / شركاء حياة</option>
+            <option value="friends">🤝 أصدقاء الروح</option>
+            <option value="founders">🚀 رواد أعمال ومؤسسون</option>
+            <option value="creatives">🎨 شركاء إبداع وفنون</option>
+            <option value="siblings">👫 إخوة وأخوات</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">نبذة الحساب المشترك (Bio):</label>
+          <textarea class="form-input" style="width: 100%; height: 75px; padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary); resize: none;">شخصان. حساب واحد. رحلتنا وإبداعاتنا المشتركة بين نواكشوط والدار البيضاء.</textarea>
+        </div>
+
+        <button class="btn btn-primary btn-full" style="padding: 12px;" onclick="saveIdentityAndEnter()">
+          🎉 حفظ وتفعيل الحساب رسمياً والدخول إلى الخلاصة ←
+        </button>
       </div>
     </div>
 
@@ -1733,6 +1825,55 @@
       </div>
       <img src="" id="storyModalImage" class="story-image-full" alt="Story">
       <div class="story-caption" id="storyModalCaption">كابشن الحالة...</div>
+    </div>
+  </div>
+
+  
+  <!-- Full Legal Terms & Compact Modal -->
+  <div class="share-modal" id="termsModal" onclick="closeTermsModal(event)" style="display: none;">
+    <div class="card" onclick="event.stopPropagation()" style="max-width: 600px; width: 92%; max-height: 85vh; display: flex; flex-direction: column; padding: 24px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--color-primary); display: flex; align-items: center; gap: 8px;">
+          <span>📜</span> ميثاق وشروط خدمة شبكة MYHALF
+        </h3>
+        <button style="background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text-secondary);" onclick="closeTermsModalDirect()">✕</button>
+      </div>
+
+      <div style="overflow-y: auto; flex: 1; padding-inline-end: 8px; font-size: 13px; line-height: 1.7; color: var(--text-primary);">
+        <p><strong>الإصدار 1.0 (2026-10-20) — النطاق: myhalf.online</strong></p>
+        <p>مرحباً بك في MYHALF. يمثل هذا المستند الاتفاقية التعاقدية الشاملة التي تحكم إنشاء وتشغيل الحسابات الثنائية المشتركة.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">1. الأهلية واستقلالية الهوية الفردية</h4>
+        <p>يشترط بلوغ سن 13 عاماً على الأقل. يمتلك كل شريك بيانات اعتماد مستقلة وخاصة به (بريد إلكتروني، كلمة مرور، و2FA). يُحظر حظراً تاماً مشاركة كلمة المرور بين الشريكين لمنع الاختراق وانتحال الشخصية.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">2. ميثاق الملكية المتساوية وحظر الإقصاء</h4>
+        <p>يمتلك الشريكان الحساب بنسبة 50% بالتساوي المطلق. لا يوجد حساب رئيسي ولا تابع. يُحظر برمجياً على أي طرف طرد شريكه أو تجميد صلاحياته منفرداً.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">3. الحوكمة المزدوجة التشفيرية (Dual Approval)</h4>
+        <p>تغيير اسم الحساب، تعديل النبذة الرسمية، أرشفة الحساب، أو حذفه مشروط بتوقيع الطرفين عبر سجل حوكمة رقمي مشفر (SHA-256) بصلاحية 48 ساعة لمنع التصرف الفردي.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">4. صوت النشر والملكية الفكرية</h4>
+        <p>يتاح النشر بصوت فردي لكل شريك أو بالصوت الموحد للثنائي. يحتفظ كل مستخدم بحقوق ملكيته الفكرية لزاويته ومحتواه، وتلتزم المنصة بعدم بيع أي بيانات لوسطاء البيانات إطلاقاً.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">5. سؤال اليوم والخصوصية العمياء (Blind Reveal)</h4>
+        <p>تُحجب إجابة الشريك في سؤال اليوم حتى يرسل الشريك الآخر إجابته، ضماناً لتكافؤ التفاعل العفوي وصيانة الخصوصية اللحظية.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">6. محادثات الثنائيات 2x2 وقناة الهمس السرية</h4>
+        <p>تمنح المنصة قناة سرية مشفرة بين الشريكين داخل المحادثات الرباعية للتشاور قبل الرد دون اطلاع الثنائي الآخر.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">7. الأمان الأحادي وقفل منع الانتقام (90-Day Escrow)</h4>
+        <p>يحق لأي شريك تجميد الحساب فوراً وسرياً لحماية أمانه الشخصي. وفي حالات النزاع، تُقفل المنشورات في حفظ مؤقت لمدة 90 يوماً لمنع المسح الانتقامي.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">8. مسارات التحول الإنساني</h4>
+        <p>تُفعل إجراءات التخليد والوفاء 🕊️ عند الوفاة بختم مشاركات المتوفى تشفيرياً للأبد، وتُتاح الكبسولة الزمنية 📦 والتصدير العادل للبيانات عند الافتراق الودي، مع تفعيل درع الإكراه 🔒 لحماية الشريك المحتجز.</p>
+
+        <h4 style="color: var(--color-primary); margin-top: 14px; margin-bottom: 4px;">9. السلوكيات المحظورة</h4>
+        <p>يُحظر نشر الصور دون إذن (NCII)، الابتزاز، انتحال الشخصية، أو خطابات الكراهية، وتؤدي المخالفات إلى التجميد الفوري والإحالة القضائية.</p>
+      </div>
+
+      <div style="margin-top: 16px; border-top: 1px solid var(--border-subtle); padding-top: 12px; text-align: center;">
+        <button class="btn btn-primary" style="padding: 8px 24px;" onclick="closeTermsModalDirect()">فهمت وأوافق على البنود</button>
+      </div>
     </div>
   </div>
 
@@ -2382,6 +2523,35 @@
           '</div>';
       }
       showToast('تم رفض المقترح وإلغاء تنفيذه.');
+    }
+  
+    // Terms & Compact Handlers
+    function openTermsModal() {
+      playPop();
+      document.getElementById('termsModal').style.display = 'flex';
+    }
+    function closeTermsModalDirect() {
+      document.getElementById('termsModal').style.display = 'none';
+    }
+    function closeTermsModal(e) {
+      closeTermsModalDirect();
+    }
+
+    function confirmCompactAcceptance() {
+      const chk = document.getElementById('chkAcceptTerms');
+      if (!chk || !chk.checked) {
+        showToast('⚠️ يجب الموافقة على ميثاق الملكية المتساوية والشروط أولاً');
+        return;
+      }
+      playChime();
+      showToast('🎉 تم توقيع ميثاق الملكية المتساوية بنجاح! انتقل لإعداد هوية الثنائي.');
+      switchScreen('screen-identity');
+    }
+
+    function saveIdentityAndEnter() {
+      playChime();
+      showToast('🚀 تم تفعيل الحساب المشترك رسمياً! أهلاً بكما في MYHALF.');
+      switchScreen('screen-feed');
     }
   </script>
 </body>
