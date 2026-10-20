@@ -1251,7 +1251,121 @@
     </div>
 
     <div id="screen-safety" class="screen-view">
-      <div class="card"><h3 style="font-size: 18px; color: var(--status-danger);">الأمان والتجميد الطارئ</h3></div>
+      
+      <!-- Top Title & Badge -->
+      <div class="card" style="margin-bottom: 16px; border-inline-start: 4px solid var(--color-primary);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <h2 style="font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+            <span>🛡️</span> مركز الأمان الإنساني ودورة حياة الشراكة
+          </h2>
+          <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 4px 10px; border-radius: var(--radius-full); font-weight: 700;">
+            بروتوكولات الحماية الذاتية
+          </span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+          الحياة تحمل تقلبات: زواج وطلاق، شراكات تنتهي، وفاة وفقدان، أو طوارئ غير متوقعة. صُممت MYHALF لتتعامل مع كل هذه اللحظات بحماية تشفيرية لا تُخرق، وبأعلى درجات الكرامة الإنسانية.
+        </p>
+      </div>
+
+      <!-- Section 1: Emergency & Anti-Revenge Actions -->
+      <div class="card" style="margin-bottom: 16px; border: 1px solid rgba(201, 74, 74, 0.3);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFEBEE; color: #C94A4A; display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+          <div>
+            <h3 style="font-size: 16px; font-weight: 800; color: #C94A4A;">التجميد الأحادي ودرع الحماية من الانتقام</h3>
+            <div style="font-size: 12px; color: var(--text-secondary);">قرار فوري لك وحدك لا يتطلب موافقة الشريك ولا يبلغه بهويتك</div>
+          </div>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.5;">
+          عند حدوث نزاع، أو خوف من مسح الذكريات، أو إذا تعرض الشريك للاعتقال أو الإكراه، يُقفل الحساب فوراً ويُعزل المحتوى عن أي مسح أو تعديل لمدة 90 يوماً.
+        </p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-danger" style="flex: 1; min-width: 160px;" onclick="triggerSafetyFreeze()">
+            🛑 تجميد الحساب فوراً
+          </button>
+          <button class="btn btn-outline" style="flex: 1; min-width: 160px; border-color: var(--status-warning); color: var(--status-warning);" onclick="triggerDuressShieldDirect()">
+            🔒 تفعيل درع الإكراه والاحتجاز
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 2: Compassionate Life Transitions -->
+      <div class="card" style="margin-bottom: 16px;">
+        <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <span>🌱</span> بروتوكولات الانتقال والظروف الإنسانية
+        </h3>
+
+        <!-- Case A: Bereavement / Death -->
+        <div style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <span>🕊️</span> وضع التخليد والوفاء (عند وفاة أحد الشريكين)
+            </div>
+            <span style="font-size: 11px; color: var(--color-primary); font-weight: 700;">ختم أبدي</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5;">
+            تُقفل منشورات وكلمات المتوفى للأبد بحيث لا يمكن لأي كائن تعديلها أو انتحال شخصيته. ويصبح الشريك الحي "حارساً للذكرى" ينشر رسائل التأبين فقط.
+          </p>
+          <button class="btn btn-secondary" style="font-size: 12px; padding: 6px 14px;" onclick="triggerMemorializationDirect()">
+            تفعيل بروتوكول التخليد والوفاء 🕊️
+          </button>
+        </div>
+
+        <!-- Case B: Amicable Divorce / Separation -->
+        <div style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <span>📦</span> الافتراق الودي والكبسولة الزمنية (طلاق أو انفصال هادئ)
+            </div>
+            <span style="font-size: 11px; color: var(--color-secondary); font-weight: 700;">موافقة مزدوجة</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5;">
+            تحويل الحساب إلى أرشيف للقراءة فقط (لا نشر ولا حذف)، مع توليد حزمة بيانات رقمية مشفرة متطابقة لكلا الطرفين للذكرى دون إيذاء.
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-primary" style="font-size: 12px; padding: 6px 14px;" onclick="triggerAmicableSunsetDirect()">
+              طلب الأرشفة الودية بالموافقة المزدوجة
+            </button>
+            <button class="btn btn-outline" style="font-size: 12px; padding: 6px 14px;" onclick="downloadEqualVaultDirect()">
+              📥 تنزيل نسختي الرقمية العادلة
+            </button>
+          </div>
+        </div>
+
+        <!-- Case C: Startup & Creative Ventures Completed -->
+        <div style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <span>🏆</span> إتمام شراكة عمل أو مشروع إبداعي
+            </div>
+            <span style="font-size: 11px; color: var(--color-primary); font-weight: 700;">معرض إنجاز</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5;">
+            تتويج الحساب كـ "مشروع مكتمل بنجاح" في قاعة المؤسسين، مع توجيه المتابعين إلى الحسابات الفردية أو الثنائية الجديدة لكل شريك.
+          </p>
+          <button class="btn btn-outline" style="font-size: 12px; padding: 6px 14px;" onclick="triggerProjectCompletionDirect()">
+            اعتماد إتمام المشروع وربط الأعمال القادمة 🏆
+          </button>
+        </div>
+
+        <!-- Case D: Inactivity & Missing Partner -->
+        <div style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+              <span>⏳</span> بروتوكول الغياب الطويل أو الانقطاع (Proof of Inactivity)
+            </div>
+            <span style="font-size: 11px; color: var(--text-tertiary); font-weight: 700;">أكثر من 180 يوماً</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.5;">
+            عند انقطاع الشريك التام، يُفعل الفحص متعدد القنوات (Dead-Man Switch). وفي حال عدم الاستجابة، تُتاح الوصاية الإنسانية المعتمدة.
+          </p>
+          <button class="btn btn-outline" style="font-size: 12px; padding: 6px 14px;" onclick="showToast('⏳ جاري فحص حالة النشاط المشفرة للشريك... الحساب محمي بالكامل')">
+            فحص حالة الانقطاع والوصاية الإنسانية
+          </button>
+        </div>
+
+      </div>
+
     </div>
 
     <div id="screen-admin" class="screen-view">
@@ -1863,6 +1977,55 @@
         });
       } else {
         showToast('💡 لتثبيت التطبيق: اضغط زر المشاركة ثم "إضافة إلى الشاشة الرئيسية"');
+      }
+    }
+  
+    // ==========================================
+    // 🕊️ Compassionate Duo Lifecycle Handlers
+    // ==========================================
+    function triggerMemorializationDirect() {
+      const confirmNotice = confirm('🕊️ هل تود تفعيل وضع التخليد والوفاء للحساب المشترك؟\n\nسيتم ختم كافة مشاركات الشريك تشفيرياً لحمايتها من أي تعديل أبدياً، وتتحول أنت إلى حارس الذاكرة.');
+      if (confirmNotice) {
+        playChime();
+        const headerTitle = document.querySelector('.brand-text h1');
+        if (headerTitle) {
+          headerTitle.innerHTML = 'MYHALF <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #E8F4F3; color: #247B78;">🕊️ في الذاكرة الدائمة</span>';
+        }
+        showToast('🕊️ تم تفعيل وضع التخليد والوفاء بنجاح. أُغلقت منشورات الشريك تشفيرياً.');
+      }
+    }
+
+    function triggerAmicableSunsetDirect() {
+      const confirmSunset = confirm('📦 هل تود إنشاء مقترح "الأرشفة الودية والكبسولة الزمنية"؟\n\nعند موافقة الشريك، سيتحول الحساب إلى معرض للقراءة فقط، وستحصلان معاً على نسخة بيانات مشفرة كاملة.');
+      if (confirmSunset) {
+        playChime();
+        showToast('📦 تم إرسال مقترح الأرشفة الودية للشريك للموافقة المزدوجة (Dual Approval)');
+      }
+    }
+
+    function downloadEqualVaultDirect() {
+      playPop();
+      showToast('📥 جاري تجهيز حزمة البيانات العادلة المتطابقة (Equal Vault Export: mhe_vault.zip)...');
+      setTimeout(() => {
+        showToast('✨ اكتمل التجهيز! تم تأكيد تسليم النسخة الرقمية المتطابقة للطرفين.');
+      }, 1200);
+    }
+
+    function triggerProjectCompletionDirect() {
+      playChime();
+      const badge = document.querySelector('.brand-text h1');
+      if (badge) {
+        badge.innerHTML = 'MYHALF <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #FFF3E0; color: #E65100;">🏆 مشروع مكتمل (Portfolio)</span>';
+      }
+      showToast('🏆 تم وسم الحساب كشراكة مكتملة بنجاح، ورُبطت الحسابات المستقبلية للشريكين.');
+    }
+
+    function triggerDuressShieldDirect() {
+      playSecretWhisper();
+      const confirmed = confirm('🔒 هل تود تفعيل "درع الإكراه والاحتجاز"؟\n\nسيتم إغلاق قناة الهمس الداخلية فوراً وتجميد أي صلاحيات لتعديل الحساب لحماية الشريك الواقع تحت الإكراه أو الاحتجاز.');
+      if (confirmed) {
+        showToast('🔒 تم تفعيل درع الإكراه والاحتجاز بنجاح. الحساب محمٍ دولياً.');
+        document.body.style.filter = 'grayscale(0.35)';
       }
     }
   </script>

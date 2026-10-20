@@ -40,3 +40,14 @@
 - **Alternatives rejected:** External heavy MP3 sound libraries, third-party share SDKs.
 - **Decided by:** Lead Frontend Engineer.
 - **Reversal cost:** Low.
+
+## 2026-10-20 — Duo Lifecycle Transitions & Compassionate Human Invariants
+- **Decision:** Implement specialized protocol state machines for human life events:
+  1. `MEMORIALIZED`: Verified bereavement seals deceased partner's history immutably; surviving partner becomes Memorial Steward.
+  2. `ARCHIVED_SUNSET`: Amicable separation/divorce transitions the account into an unalterable read-only time capsule with an Equal Vault Data Export.
+  3. `EMERGENCY_FROZEN` & Anti-Revenge Lock: Unilateral freeze locks joint assets into a 90-day digital escrow, blocking all vengeful deletions or asset purging.
+  4. `PROJECT_COMPLETED`: Creative/startup ventures convert into verified portfolio archives with dual forwarding links.
+  5. `Duress & Detention Shield`: Protects kidnapped, imprisoned, or coerced partners by disallowing in-app actions while under external duress.
+- **Why:** In a two-person network, human relationships change over time. Ignoring bereavement, divorce, or coercion breaks trust and risks real-world physical and digital harm.
+- **Decided by:** Product Lead & Lead Architect upon user directive.
+- **Reversal cost:** High (core data invariant).
