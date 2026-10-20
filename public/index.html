@@ -881,7 +881,7 @@
 <body>
 
   <!-- Screen Quick Switcher -->
-  <div class="screen-selector-bar" id="screenBar">
+  <div class="screen-selector-bar" id="screenBar" style="display: none;">
     <span style="font-size: 12px; font-weight: 700; color: var(--text-tertiary);" id="txtScreenSelect">الشاشات:</span>
     <button class="screen-pill" onclick="switchScreen('screen-welcome')">01. الترحيب</button>
     <button class="screen-pill" onclick="switchScreen('screen-auth')">02. التسجيل المنفصل</button>
@@ -914,8 +914,11 @@
       <button class="icon-btn" onclick="openShareModal()" title="توليد بطاقة المشاركة الفاخرة">
         <span>🪪</span> <span style="font-size: 11px;">بطاقة الثنائي</span>
       </button>
+      <button class="icon-btn" onclick="switchScreen('screen-notifications')" title="الإشعارات والموافقات">
+        <span>🔔</span> <span class="badge" style="background: var(--status-danger); color: white; border-radius: 50%; font-size: 10px; padding: 1px 5px; margin-inline-start: -4px;">2</span>
+      </button>
       <button class="icon-btn" onclick="openChatModal()" title="الدردشة المشتركة 2x2">
-        <span>💬</span> <span style="font-size: 11px;">الدردشة 2x2</span>
+        <span>💬</span> <span style="font-size: 11px;">الدردشة</span>
       </button>
       <button class="icon-btn" onclick="toggleSound()" title="تبديل المؤثرات الصوتية التفاعلية" id="btnSound">🔊</button>
       <button class="icon-btn" onclick="installPWA()" title="تثبيت التطبيق على جهازك" id="btnInstallApp" style="display:none; color: var(--color-primary); font-weight:700;">
@@ -1216,38 +1219,260 @@
 
     <div id="screen-create-post" class="screen-view">
       <div class="card">
-        <h3 style="font-size: 18px; margin-bottom: 14px;">إنشاء منشور عادي</h3>
-        <button class="btn btn-primary btn-full" onclick="showToast('تم النشر بنجاح!'); switchScreen('screen-feed');">نشر</button>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <h3 style="font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+            <span>✍️</span> إنشاء منشور جديد باسم الثنائي
+          </h3>
+          <span style="font-size: 11px; background: var(--bg-elevated); padding: 4px 10px; border-radius: var(--radius-full); color: var(--text-secondary);">
+            يُنشر على @sara_and_omar
+          </span>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; font-weight: 700; color: var(--text-secondary); display: block; margin-bottom: 6px;">اختر صوت المنشور:</label>
+          <div style="display: flex; gap: 8px;">
+            <button class="voice-btn active" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--color-primary); background: var(--color-primary-light); color: var(--color-primary); cursor: pointer;" onclick="selectComposerVoice(this, 'صوت موحد للثنائي')">🤝 صوت الثنائي الموحد</button>
+            <button class="voice-btn" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); cursor: pointer;" onclick="selectComposerVoice(this, 'سارة')">👩 سارة</button>
+            <button class="voice-btn" type="button" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-surface); cursor: pointer;" onclick="selectComposerVoice(this, 'عمر')">👨 عمر</button>
+          </div>
+        </div>
+
+        <textarea id="composerText" class="form-input" style="width: 100%; min-height: 110px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); padding: 12px; font-family: inherit; margin-bottom: 14px; background: var(--bg-elevated); color: var(--text-primary); resize: vertical;" placeholder="ماذا يدور في ذهنكما اليوم؟ شاركا لحظة جديدة من رحلتكما..."></textarea>
+
+        <div style="border: 2px dashed var(--border-subtle); border-radius: var(--radius-md); padding: 16px; text-align: center; margin-bottom: 16px; cursor: pointer;" onclick="showToast('📷 تم تحديد صورة المنشور بنجاح!')">
+          <div style="font-size: 24px; margin-bottom: 4px;">🖼️</div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--color-primary);">إضافة صورة أو مقطع فيديو</div>
+          <div style="font-size: 11px; color: var(--text-tertiary);">PNG, JPG, MP4 حتى 50MB</div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" style="flex: 2;" onclick="publishCustomPost()">🚀 نشر في الخلاصة</button>
+          <button class="btn btn-outline" style="flex: 1;" onclick="switchScreen('screen-feed')">إلغاء</button>
+        </div>
       </div>
     </div>
 
     <div id="screen-create-tp" class="screen-view">
       <div class="card" style="border: 2px solid var(--color-primary);">
-        <h3 style="font-size: 18px; margin-bottom: 6px;">صناعة منشور الزاويتين (Two Perspectives)</h3>
-        <button class="btn btn-primary btn-full" onclick="showToast('تم اعتماد ونشر منشور الزاويتين!'); switchScreen('screen-feed');">نشر المنشور المزدوج علناً</button>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <h3 style="font-size: 18px; font-weight: 800; color: var(--color-primary); display: flex; align-items: center; gap: 8px;">
+            <span>🌓</span> محرر منشور الزاويتين (Two Perspectives)
+          </h3>
+          <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 3px 8px; border-radius: var(--radius-full); font-weight: 700;">ابتكار MYHALF</span>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">
+          المنشور الثوري الذي يسمح للمتابعين بسحب الشريط التفاعلي 50/50 لمشاهدة وجهتي نظركما لنفس اللحظة.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-md); border-top: 3px solid var(--color-primary);">
+            <div style="font-size: 13px; font-weight: 800; margin-bottom: 6px; color: var(--color-primary);">زاوية سارة (Partner 1)</div>
+            <textarea class="form-input" style="width: 100%; height: 75px; font-size: 11px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--bg-surface); color: var(--text-primary);" placeholder="انطباعك يا سارة..."></textarea>
+            <button class="btn btn-outline" style="width: 100%; font-size: 11px; padding: 5px;" onclick="showToast('📷 تم ربط صورة الزاوية الأولى')">📷 صورة الزاوية 1</button>
+          </div>
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-md); border-top: 3px solid var(--color-secondary);">
+            <div style="font-size: 13px; font-weight: 800; margin-bottom: 6px; color: var(--color-secondary);">زاوية عمر (Partner 2)</div>
+            <textarea class="form-input" style="width: 100%; height: 75px; font-size: 11px; padding: 8px; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); margin-bottom: 8px; background: var(--bg-surface); color: var(--text-primary);" placeholder="انطباعك يا عمر..."></textarea>
+            <button class="btn btn-outline" style="width: 100%; font-size: 11px; padding: 5px;" onclick="showToast('📷 تم ربط صورة الزاوية الثانية')">📷 صورة الزاوية 2</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="publishSplitPostDirect()">
+          ✨ دمج الزاويتين ونشر المنشور التفاعلي
+        </button>
       </div>
     </div>
 
     <div id="screen-explore" class="screen-view">
-      <div class="card">
-        <h3 style="font-size: 19px; margin-bottom: 14px;">استكشاف الثنائيات الملهمة</h3>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>🧭</span> استكشاف الثنائيات الملهمة
+        </h3>
+        <!-- Archetype Filter Pills -->
+        <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px;">
+          <button class="screen-pill active" onclick="filterArchetype(this, 'all')">الكل</button>
+          <button class="screen-pill" onclick="filterArchetype(this, 'couples')">💑 أزواج وشركاء</button>
+          <button class="screen-pill" onclick="filterArchetype(this, 'friends')">🤝 أصدقاء الروح</button>
+          <button class="screen-pill" onclick="filterArchetype(this, 'founders')">🚀 رواد أعمال</button>
+          <button class="screen-pill" onclick="filterArchetype(this, 'creatives')">🎨 مبدعون وفنانون</button>
+        </div>
+
+        <!-- Duo Cards List -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <!-- Duo Card 1 -->
+          <div class="card" style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="duo-avatar-box overlap">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" class="avatar-img" alt="K">
+                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=60&h=60&fit=crop" class="avatar-img" alt="Y">
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 800;">كريم ويوسف (@tech_duo)</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">مؤسسان تقنيان • 🔥 19 يوماً تفاعل</div>
+              </div>
+            </div>
+            <button class="btn btn-secondary" style="font-size: 11px; padding: 6px 14px;" onclick="toggleFollowDuo(this)">متابعة</button>
+          </div>
+
+          <!-- Duo Card 2 -->
+          <div class="card" style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="duo-avatar-box overlap">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop" class="avatar-img" alt="F">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop" class="avatar-img" alt="M">
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 800;">فاطمة ومريم (@tandem_art)</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">ثنائي فني تشكيلي • 🔥 56 يوماً تفاعل</div>
+              </div>
+            </div>
+            <button class="btn btn-secondary" style="font-size: 11px; padding: 6px 14px;" onclick="toggleFollowDuo(this)">متابعة</button>
+          </div>
+
+          <!-- Duo Card 3 -->
+          <div class="card" style="background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="duo-avatar-box overlap">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=60&h=60&fit=crop" class="avatar-img" alt="Z">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" class="avatar-img" alt="T">
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 800;">زياد وطارق (@summit_climbers)</div>
+                <div style="font-size: 11px; color: var(--text-secondary);">رحالة ومستكشفو جبال • 🔥 88 يوماً</div>
+              </div>
+            </div>
+            <button class="btn btn-secondary" style="font-size: 11px; padding: 6px 14px;" onclick="toggleFollowDuo(this)">متابعة</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div id="screen-search" class="screen-view">
-      <div class="card"><h3 style="font-size: 18px;">البحث</h3></div>
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 12px;">🔍 البحث في شبكة الثنائيات</h3>
+        <div style="position: relative; margin-bottom: 16px;">
+          <input type="text" class="form-input" style="width: 100%; padding: 12px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-subtle); background: var(--bg-elevated); color: var(--text-primary); font-family: inherit;" placeholder="ابحث باسم الثنائي، المعرف @handle، أو الاهتمام..." oninput="handleSearchFilter(this.value)">
+        </div>
+        <div id="searchResults" style="font-size: 12px; color: var(--text-secondary); text-align: center; padding: 20px 0;">
+          اكتب اسم ثنائي أو اهتمام مشترك لعرض النتائج المباشرة.
+        </div>
+      </div>
     </div>
 
     <div id="screen-notifications" class="screen-view">
-      <div class="card"><h3 style="font-size: 18px;">الإشعارات</h3></div>
+      <div class="card">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <h3 style="font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+            <span>🔔</span> التنبيهات وإشعارات الثنائي
+          </h3>
+          <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 3px 8px; border-radius: var(--radius-full); font-weight: 700;">2 غير مقروء</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Notification 1 -->
+          <div style="background: var(--color-primary-light); border-inline-start: 4px solid var(--color-primary); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;" onclick="switchScreen('screen-approvals')">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; font-weight: 800; color: var(--color-primary);">⚖️ طلب موافقة مزدوجة عاجل</span>
+              <span style="font-size: 10px; color: var(--text-tertiary);">منذ 15 دقيقة</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">اقترح شريكك (عمر) تعديل النبذة التعريفية للحساب. اضغط للمعاينة والاعتماد.</div>
+          </div>
+
+          <!-- Notification 2 -->
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;" onclick="switchScreen('screen-feed')">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; font-weight: 800; color: var(--color-secondary);">⚡ إجابة سؤال اليوم المشترك</span>
+              <span style="font-size: 10px; color: var(--text-tertiary);">منذ ساعتين</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-primary); line-height: 1.4;">أجاب عمر للتو على سؤال اليوم! أكمل إجابتك الآن لكشف كلا الإجابتين معاً.</div>
+          </div>
+
+          <!-- Notification 3 -->
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); cursor: pointer;" onclick="openChatModal()">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; font-weight: 800;">💬 رسالة في محادثة 2x2</span>
+              <span style="font-size: 10px; color: var(--text-tertiary);">أمس</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">أرسل الثنائي فاطمة ومريم (@tandem_art) رداً في محادثتكم الرباعية.</div>
+          </div>
+
+          <!-- Notification 4 -->
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 12px; font-weight: 800; color: #E65100;">🔥 مستوى تفاعل جديد!</span>
+              <span style="font-size: 10px; color: var(--text-tertiary);">منذ يومين</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.4;">وصلتما إلى 43 يوماً متواصلاً من التفاعل! تم منحكما شارة الثنائي المتناغم.</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="screen-approvals" class="screen-view">
-      <div class="card"><h3 style="font-size: 18px;">الموافقة المزدوجة</h3></div>
+      <div class="card">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+          <h3 style="font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+            <span>⚖️</span> سجل الحوكمة والموافقة المزدوجة (Dual Approval)
+          </h3>
+          <span style="font-size: 11px; background: var(--bg-elevated); padding: 3px 8px; border-radius: var(--radius-full);">SHA-256 محمي</span>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">
+          أي تعديل حساس في الحساب (تغيير المعرف، النبذة، تفكيك الشراكة، أو تصدير الأرشيف) يتطلب توقيع الشريكين معاً منعاً للاستفراد أو السيطرة الأحادية.
+        </p>
+
+        <!-- Active Proposal Card -->
+        <div id="activeProposalCard" style="background: var(--bg-elevated); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--color-primary); margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--color-primary);">مقترح تعديل نبذة الحساب المشترك</div>
+            <span style="font-size: 11px; background: var(--color-primary-light); color: var(--color-primary); padding: 2px 8px; border-radius: var(--radius-full); font-weight: 700;">بانتظار موافقتك</span>
+          </div>
+          <div style="font-size: 11px; color: var(--text-tertiary); margin-bottom: 8px; font-family: monospace;">Hash: 8f4a9b2c1e... (صالحة لـ 44 ساعة)</div>
+          <div style="background: var(--bg-surface); padding: 10px; border-radius: var(--radius-sm); font-size: 12px; margin-bottom: 14px; border: 1px solid var(--border-subtle);">
+            <strong>النبذة المقترحة:</strong> "شخصان. حساب واحد. رحلتنا وإبداعاتنا المشتركة بين نواكشوط والدار البيضاء مع إطلاق استوديو التصوير الجديد 📸"
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-primary" style="flex: 2;" onclick="approveProposalDirect()">✅ اعتماد وتوقيع المقترح</button>
+            <button class="btn btn-outline" style="flex: 1; border-color: var(--status-danger); color: var(--status-danger);" onclick="rejectProposalDirect()">❌ رفض</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="screen-settings" class="screen-view">
-      <div class="card"><h3 style="font-size: 18px;">الإعدادات</h3></div>
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+          <span>⚙️</span> إعدادات الحساب الثنائي والخصوصية
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Option: Privacy -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <div style="font-size: 14px; font-weight: 700;">خصوصية الحساب</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">حساب عام يظهر في الاستكشاف لجميع الثنائيات</div>
+            </div>
+            <button class="btn btn-outline" style="font-size: 12px; padding: 6px 12px;" onclick="showToast('تم حفظ خصوصية الحساب كـ [عام]')">عام (Public)</button>
+          </div>
+
+          <!-- Option: Legacy Contact -->
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
+            <div>
+              <div style="font-size: 14px; font-weight: 700;">الوصي الرقمي المعتمد (Legacy Contact)</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">جهة اتصال موثوقة عند الطوارئ القصوى أو الوفاة</div>
+            </div>
+            <button class="btn btn-outline" style="font-size: 12px; padding: 6px 12px;" onclick="showToast('تم تعيين الوصي الرقمي: contact@family-trust.org')">تعيين وصي</button>
+          </div>
+
+          <!-- Option: Dev Mode Toggle -->
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 14px; font-weight: 700;">شريط المطورين والتدقيق (Dev Mode)</div>
+              <div style="font-size: 12px; color: var(--text-secondary);">إظهار أو إخفاء شريط التنقل السريع بين الشاشات الـ 16</div>
+            </div>
+            <button class="btn btn-outline" style="font-size: 12px; padding: 6px 12px;" onclick="toggleDevBar()">تبديل العرض</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="screen-safety" class="screen-view">
@@ -1369,7 +1594,28 @@
     </div>
 
     <div id="screen-admin" class="screen-view">
-      <div class="card"><h3 style="font-size: 18px;">لوحة الإشراف</h3></div>
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <span>🛡️</span> لوحة الرقابة ونزاهة الحوكمة (Trust & Governance Monitor)
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px;">
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+            <div style="font-size: 11px; color: var(--text-tertiary);">الثنائيات النشطة</div>
+            <div style="font-size: 20px; font-weight: 800; color: var(--color-primary);">1,420</div>
+          </div>
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+            <div style="font-size: 11px; color: var(--text-tertiary);">نزاهة الملاك (2 strictly)</div>
+            <div style="font-size: 20px; font-weight: 800; color: var(--status-success);">100%</div>
+          </div>
+          <div style="background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm); text-align: center;">
+            <div style="font-size: 11px; color: var(--text-tertiary);">محاولات الإقصاء الفردي</div>
+            <div style="font-size: 20px; font-weight: 800; color: var(--status-danger);">0 (Blocked)</div>
+          </div>
+        </div>
+        <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; background: var(--bg-elevated); padding: 12px; border-radius: var(--radius-sm);">
+          ✅ كافة قواعد التحقق التشفيري (RLS, SHA-256 Proposal Hashes, Blind Privacy Reveal, Anti-Revenge Lock) تعمل بكفاءة على الحوسبة الطرفية.
+        </div>
+      </div>
     </div>
 
   </main>
@@ -2027,6 +2273,115 @@
         showToast('🔒 تم تفعيل درع الإكراه والاحتجاز بنجاح. الحساب محمٍ دولياً.');
         document.body.style.filter = 'grayscale(0.35)';
       }
+    }
+  
+    // Dev Bar Toggle
+    function toggleDevBar() {
+      playPop();
+      const bar = document.getElementById('screenBar');
+      if (bar) {
+        bar.style.display = bar.style.display === 'none' ? 'flex' : 'none';
+        showToast(bar.style.display === 'none' ? 'تم إخفاء شريط المطورين' : 'تم إظهار شريط المطورين');
+      }
+    }
+
+    // Composer Voice Selection
+    let composerVoice = 'صوت موحد للثنائي';
+    function selectComposerVoice(btn, voice) {
+      playPop();
+      document.querySelectorAll('#screen-create-post .voice-btn').forEach(b => {
+        b.style.borderColor = 'var(--border-subtle)';
+        b.style.background = 'var(--bg-surface)';
+        b.style.color = 'var(--text-primary)';
+      });
+      btn.style.borderColor = 'var(--color-primary)';
+      btn.style.background = 'var(--color-primary-light)';
+      btn.style.color = 'var(--color-primary)';
+      composerVoice = voice;
+      showToast('النشر الآن: ' + voice);
+    }
+
+    // Publish Custom Post directly into feed
+    function publishCustomPost() {
+      const text = document.getElementById('composerText').value.trim();
+      if (!text) {
+        showToast('⚠️ يرجى كتابة نص المنشور أولاً');
+        return;
+      }
+      playChime();
+      showToast('✨ تم نشر المنشور بنجاح في خلاصة الثنائي!');
+      document.getElementById('composerText').value = '';
+      switchScreen('screen-feed');
+    }
+
+    function publishSplitPostDirect() {
+      playChime();
+      showToast('✨ تم اعتماد ونشر منشور الزاويتين بنجاح في خلاصة الثنائي!');
+      switchScreen('screen-feed');
+    }
+
+    // Explore Filter
+    function filterArchetype(btn, type) {
+      playPop();
+      document.querySelectorAll('#screen-explore .screen-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showToast('تصفية الثنائيات: ' + btn.innerText);
+    }
+
+    // Follow Toggle
+    function toggleFollowDuo(btn) {
+      playPop();
+      if (btn.innerText === 'متابعة') {
+        btn.innerText = 'مُتابَع ✓';
+        btn.style.background = 'var(--bg-elevated)';
+        btn.style.color = 'var(--text-primary)';
+        showToast('تمت متابعة الثنائي باسمكما المشترك!');
+      } else {
+        btn.innerText = 'متابعة';
+        btn.style.background = 'var(--color-secondary)';
+        btn.style.color = 'white';
+        showToast('تم إلغاء المتابعة');
+      }
+    }
+
+    // Search filter
+    function handleSearchFilter(query) {
+      const res = document.getElementById('searchResults');
+      if (!query.trim()) {
+        res.innerHTML = 'اكتب اسم ثنائي أو اهتمام مشترك لعرض النتائج المباشرة.';
+        return;
+      }
+      res.innerHTML = '<div style="text-align: right; display: flex; flex-direction: column; gap: 8px;">' +
+        '<div style="background: var(--bg-surface); padding: 10px; border-radius: 8px; border: 1px solid var(--border-subtle);">' +
+        '<strong>سارة وعمر (@sara_and_omar)</strong> — 43 يوماً تفاعل • ثنائي إبداعي' +
+        '</div>' +
+        '<div style="background: var(--bg-surface); padding: 10px; border-radius: 8px; border: 1px solid var(--border-subtle);">' +
+        '<strong>كريم ويوسف (@tech_duo)</strong> — مؤسسان تقنيان • تطبيق MYHALF' +
+        '</div>' +
+        '</div>';
+    }
+
+    // Proposal Actions
+    function approveProposalDirect() {
+      playChime();
+      const card = document.getElementById('activeProposalCard');
+      if (card) {
+        card.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--status-success); font-weight: 800;">' +
+          '✅ تم توقيع واعتماد المقترح بنجاح عبر التوقيع الثنائي المتزامن! تم تحديث نبذة الحساب.' +
+          '</div>';
+      }
+      showToast('🎉 تمت الموافقة المزدوجة ونُفّذ التعديل بنجاح!');
+    }
+
+    function rejectProposalDirect() {
+      playPop();
+      const card = document.getElementById('activeProposalCard');
+      if (card) {
+        card.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--status-danger); font-weight: 700;">' +
+          '❌ تم رفض المقترح وأرشفته.' +
+          '</div>';
+      }
+      showToast('تم رفض المقترح وإلغاء تنفيذه.');
     }
   </script>
 </body>
