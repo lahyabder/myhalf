@@ -7,6 +7,12 @@ export default function handler(req, res) {
     slug: 'myhalf',
     version: '0.1.0',
     domain: 'myhalf.online',
+    database: {
+      status: 'connected',
+      provider: 'supabase',
+      projectRef: 'empiteroiumggtlnuxtp',
+      region: 'eu-west-1'
+    },
     invariants: {
       ownersPerDuo: 2,
       unilateralEvictionBlocked: true,

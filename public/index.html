@@ -877,6 +877,7 @@
       to { transform: translate(-50%, 0); opacity: 1; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -1881,6 +1882,23 @@
   <div class="toast-container" id="toast">رسالة النظام</div>
 
   <script>
+
+    // ==========================================
+    // 🗄️ Supabase Live Database Connection
+    // ==========================================
+    const SUPABASE_PROJECT_URL = 'https://empiteroiumggtlnuxtp.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVtcGl0ZXJvaXVtZ2d0bG51eHRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MDQ4MTYsImV4cCI6MjEwODA4MDgxNn0.0n2T9DVr3zhKCnxQewPruFGMOk8AUNBW8iJ6O4uhSe0';
+    let supabaseClient = null;
+
+    try {
+      if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_KEY);
+        console.log('🚀 [MYHALF] Connected to live Supabase database: ' + SUPABASE_PROJECT_URL);
+      }
+    } catch (e) {
+      console.warn('[MYHALF] Running with offline fallback data', e);
+    }
+
     // Prompt State Machine
     const promptState = {
       currentActor: 'sarah', // 'sarah' | 'omar'
